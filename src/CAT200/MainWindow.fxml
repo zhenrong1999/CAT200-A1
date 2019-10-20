@@ -22,6 +22,13 @@
       </AnchorPane>
       <AnchorPane fx:id="content" layoutX="199.0" prefHeight="430.0" prefWidth="501.0" style="-fx-background-color: #6807f9;">
          <children>
+
+            <Pane fx:id="home_pane" layoutX="12.0" layoutY="76.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;" />
+            <Label fx:id="Title" prefHeight="50.0" prefWidth="278.0" text="Home" textFill="#08b8ff">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
             <Pane fx:id="add_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #c400c6;">
                <children>
                      <TextField fx:id="cubic_id" layoutX="148.0" layoutY="26.0" />
@@ -50,7 +57,7 @@
                      <font>
                         <Font size="17.0" />
                      </font></Label>
-                  <TableView id="search_result" layoutY="143.0" prefHeight="196.0" prefWidth="475.0">
+                  <TableView fx:id="search_result" layoutY="143.0" prefHeight="196.0" prefWidth="475.0">
                     <columns>
                       <TableColumn fx:id="matric_column" editable="false" prefWidth="75.0" sortable="false" text="No. Matric" />
                       <TableColumn fx:id="name_column" editable="false" prefWidth="75.0" sortable="false" text="Name" />
@@ -61,13 +68,6 @@
                   </TableView>
                </children>
             </Pane>
-
-            <Pane fx:id="home_pane" layoutX="12.0" layoutY="76.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;" />
-            <Label fx:id="Title" prefHeight="50.0" prefWidth="278.0" text="Home" textFill="#08b8ff">
-               <font>
-                  <Font name="Arial" size="36.0" />
-               </font>
-            </Label>
          </children></AnchorPane>
    </children>
 </AnchorPane>

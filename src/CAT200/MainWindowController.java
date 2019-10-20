@@ -2,6 +2,7 @@ package CAT200;
 
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,6 +18,9 @@ import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
     Student_Database student_database = new Student_Database(); //package-private
+    private Main main;
+    public void setMainApp(Main mainApp) {
+        this.main = mainApp;}
 
     //For Side Menu
     @FXML
@@ -37,8 +41,9 @@ public class MainWindowController implements Initializable {
             {Title.setText("Search Student");
             search_pane.toFront();}
         else if(event.getSource()==Exit)
-            {Title.setText("Exit");
+            {Title.setText("Exiting");
             // get a handle to the stage
+                main.reader.SaveToFile(student_database);
             Stage stage = (Stage) Exit.getScene().getWindow();
             stage.close();}
     }
@@ -65,20 +70,31 @@ public class MainWindowController implements Initializable {
     private ChoiceBox<String> type;
     @FXML
     private TableColumn matric_column, name_column, cubicle_column,    date_column,           superisor_column;
-
+@FXML
+private  TableView search_result;
     public void search_in_action() {
         Student_Database result=student_database.searchForAll(type.getValue(),search_text.getText());
-        matric_column.setCellValueFactory(new PropertyValueFactory<>("matricNum"));
-        name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
-        cubicle_column.setCellValueFactory(new PropertyValueFactory<>("cubic_id"));
-        date_column.setCellValueFactory(new PropertyValueFactory<>("checkdate"));
-        superisor_column.setCellValueFactory(new PropertyValueFactory<>("supervisor"));
+        ObservableList<Student> personData = FXCollections.observableArrayList();
 
+        if(result.size()!=0)
+            {
+                personData.addAll(result);
+                }
+        else
+        {
+            personData.add(new Student("No Result","No Result","No Result","No Result","No Result"));
+        }
+        search_result.setItems(personData);
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[] typelist= { "Cubicle ID", "Name Student", "Matric number","Check in date", "Supervisor"};
         type.setItems(FXCollections.observableArrayList(typelist));
+        matric_column.setCellValueFactory(new PropertyValueFactory<>("matric_no"));
+        name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cubicle_column.setCellValueFactory(new PropertyValueFactory<>("cubic_id"));
+        date_column.setCellValueFactory(new PropertyValueFactory<>("checkdate"));
+        superisor_column.setCellValueFactory(new PropertyValueFactory<>("supervisor"));
     }
 }

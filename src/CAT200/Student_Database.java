@@ -121,7 +121,7 @@ public class Student_Database extends LinkedList<Student> {
             try {
                 super.add(i, new Student(data_extracted[0],data_extracted[1],data_extracted[2],data_extracted[3],data_extracted[4]));
             } catch (Exception e) {
-                throw new IllegalStateException("There are alphabet in line " + i);
+                throw new IllegalStateException("There are error in line " + i);
             }
         }
     }

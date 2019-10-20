@@ -6,16 +6,21 @@
 package CAT200;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 //import java.io.FileNotFoundException;
 
-public class ReadTxt {
+public class File_Handling {
     private LinkedList<String> temporary = new LinkedList<String>();
+    private String filename;
 
-    public ReadTxt(String filename) {
+    public File_Handling(String filename){this.filename=filename;}
+
+    public void ReadFromFile() {
         try {
             File fmanager = new File(filename);
             if (fmanager.createNewFile()) {
@@ -44,5 +49,19 @@ public class ReadTxt {
 
     public LinkedList<String> getData() {
         return temporary;
+    }
+    
+    public void SaveToFile(Student_Database student_database){
+        File fmanager = new File(filename);
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fmanager, true))) {
+            for (Student i:student_database
+                 ) {
+                writer.println(i.getMatric_no()+" "+i.getName()+" "+i.getCubic_id()+" "+i.getCheckdate()+" "+i.getSupervisor());
+            }
+
+        } catch (IOException e) {
+
+
+        }
     }
 }

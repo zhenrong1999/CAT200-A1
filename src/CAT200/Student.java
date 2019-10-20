@@ -9,11 +9,11 @@ public class Student {
         private SimpleStringProperty matric_no = new SimpleStringProperty();
         private SimpleStringProperty  checkdate = new SimpleStringProperty();
         private SimpleStringProperty  supervisor = new SimpleStringProperty();
-    public Student(String a) {
-        name = new SimpleStringProperty(a);
+    public Student(String name) {
+        this.name.set(name);
     }
-    public Student(String a, String b, String c, String d, String e) {
-        setData(a, b, c, d, e);
+    public Student(String matricno, String name, String cubic_id, String checkdate, String supervisor) {
+        setData(matricno, name, cubic_id,  checkdate,  supervisor);
     }
 
     public String getCheckdate() {
