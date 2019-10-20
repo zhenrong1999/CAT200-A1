@@ -55,13 +55,17 @@ public class MainWindowController implements Initializable {
     @FXML
     private TextField cubic_id,name,matricNum,checkdate,supervisor;
 
-    public void userClickSubmit(){
+    public void userClickSubmit() throws IOException{
+        FileWriter fileWriter = new FileWriter("database.txt", true);
         Student newStud = new Student(matricNum.getText(), name.getText(), cubic_id.getText(), checkdate.getText(), supervisor.getText());
         Boolean valid = newStud.validation();
-        if(valid)
+        if(valid) {
             student_database.add(newStud);
+            fileWriter.write(matricNum.getText() + " " + name.getText() + " " + cubic_id.getText() + " " + checkdate.getText() + " " + supervisor.getText());
+        }
         else
-            System.out.println("Input data error");
+            System.out.println("Input data error. Please try again.");
+        fileWriter.close();
     }
 
 
