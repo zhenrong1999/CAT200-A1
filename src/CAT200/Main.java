@@ -14,6 +14,8 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 700, 430));
         primaryStage.show();
+        student_database b;
+
     }
 
 
