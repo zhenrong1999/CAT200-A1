@@ -116,13 +116,21 @@ public class Student_Database extends LinkedList<Student> {
 
     public void addFromLinkedList(LinkedList<String> raw_data) {
         String[] data_extracted;
+        Boolean valid = true;
+        int error=0;
         for (int i = 0; i < raw_data.size(); i++) {
             data_extracted = raw_data.get(i).split(" ");
             try {
-                super.add(i, new Student(data_extracted[0],data_extracted[1],data_extracted[2],data_extracted[3],data_extracted[4]));
+                Student newStud = new Student(data_extracted[0],data_extracted[1],data_extracted[2],data_extracted[3],data_extracted[4]);
+                valid = newStud.validation();
+                if(valid)
+                    super.add(i, newStud);
+                else
+                    error++;
             } catch (Exception e) {
                 throw new IllegalStateException("There are error in line " + i);
             }
         }
+        System.out.println("No. of errors : " + error);
     }
 }
