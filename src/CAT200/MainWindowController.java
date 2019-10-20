@@ -56,8 +56,12 @@ public class MainWindowController implements Initializable {
     private TextField cubic_id,name,matricNum,checkdate,supervisor;
 
     public void userClickSubmit(){
-        Student newStud = new Student(cubic_id.getText(), name.getText(), matricNum.getText(), checkdate.getText(), supervisor.getText());
-        student_database.add(newStud);
+        Student newStud = new Student(matricNum.getText(), name.getText(), cubic_id.getText(), checkdate.getText(), supervisor.getText());
+        Boolean valid = newStud.validation();
+        if(valid)
+            student_database.add(newStud);
+        else
+            System.out.println("Input data error");
     }
 
 
@@ -98,3 +102,4 @@ private  TableView search_result;
         superisor_column.setCellValueFactory(new PropertyValueFactory<>("supervisor"));
     }
 }
+
