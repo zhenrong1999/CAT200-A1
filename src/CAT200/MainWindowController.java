@@ -5,10 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -18,6 +16,9 @@ import java.util.ResourceBundle;
 
 
 public class MainWindowController implements Initializable {
+    Student_Database student_database = new Student_Database(); //package-private
+
+    //For Side Menu
     @FXML
     private Button Home,Add,Search,Exit;
     @FXML
@@ -42,35 +43,36 @@ public class MainWindowController implements Initializable {
             stage.close();}
     }
 
+
+    //For Add/Edit Student Info Scene
     @FXML
     private Button submit;
     @FXML
-    private TextField cubic_id ;
-    @FXML
-    private TextField name ;
-    @FXML
-    private TextField matricNum ;
-    @FXML
-    private TextField checkdate ;
-    @FXML
-    private TextField supervisor ;
+    private TextField cubic_id,name,matricNum,checkdate,supervisor;
 
-    public Student userClickSubmit(){
+    public void userClickSubmit(){
         Student newStud = new Student(cubic_id.getText(), name.getText(), matricNum.getText(), checkdate.getText(), supervisor.getText());
-
-        return newStud;
+        student_database.add(newStud);
     }
 
 
-
+    //For Search Student Info Scene
     @FXML
     private TextField search_text;
     @FXML
     private Button search_button;
     @FXML
     private ChoiceBox<String> type;
+    @FXML
+    private TableColumn matric_column, name_column, cubicle_column,    date_column,           superisor_column;
 
     public void search_in_action() {
+        Student_Database result=student_database.searchForAll(type.getValue(),search_text.getText());
+        matric_column.setCellValueFactory(new PropertyValueFactory<>("matricNum"));
+        name_column.setCellValueFactory(new PropertyValueFactory<>("name"));
+        cubicle_column.setCellValueFactory(new PropertyValueFactory<>("cubic_id"));
+        date_column.setCellValueFactory(new PropertyValueFactory<>("checkdate"));
+        superisor_column.setCellValueFactory(new PropertyValueFactory<>("supervisor"));
 
     }
 

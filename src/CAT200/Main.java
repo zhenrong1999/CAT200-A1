@@ -10,12 +10,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
+        ReadTxt reader = new ReadTxt("database.txt"); //Read from text file
+        FXMLLoader loader = new FXMLLoader (getClass().getResource("MainWindow.fxml"));
+        Parent root = loader.load();
+        MainWindowController mainWindowController = loader.getController();
+        mainWindowController.student_database.addFromLinkedList(reader.getData()); //Extract raw data from the file reader into structured data
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 700, 430));
         primaryStage.show();
-        student_database b;
-
     }
 
 
