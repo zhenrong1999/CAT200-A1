@@ -1,8 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.GridPane?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<GridPane fx:controller="CAT200.MainWindowController"
-          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
-</GridPane>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CAT200.MainWindowController">
+   <children>
+      <AnchorPane fx:id="side_menu" prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #c299fc;">
+         <children>
+            <AnchorPane fx:id="small_side_menu" prefHeight="430.0" prefWidth="45.0" style="-fx-background-color: #9852f9;" />
+             <Button fx:id="Home" layoutY="115.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Home" textAlignment="RIGHT" />
+             <Button fx:id="Add" layoutY="165.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Add Student" textAlignment="RIGHT" />
+            <Button fx:id="Search" layoutY="215.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Search Student" textAlignment="RIGHT" />
+            <Button fx:id="Exit" layoutY="265.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Exit" textAlignment="RIGHT" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="content" layoutX="199.0" prefHeight="430.0" prefWidth="501.0" style="-fx-background-color: #6807f9;">
+         <children>
+            <Pane fx:id="search_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;" />
+            <Pane fx:id="add_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;" />
+            <Pane fx:id="home_pane" layoutX="12.0" layoutY="76.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;" />
+            <Label fx:id="Title" layoutX="14.0" layoutY="26.0" prefHeight="50.0" prefWidth="278.0" text="Home" textFill="#08b8ff">
+               <font>
+                  <Font name="Arial" size="36.0" />
+               </font>
+            </Label>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
