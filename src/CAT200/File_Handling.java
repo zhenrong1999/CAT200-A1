@@ -18,7 +18,9 @@ public class File_Handling {
     private LinkedList<String> temporary = new LinkedList<String>();
     private String filename;
 
-    public File_Handling(String filename){this.filename=filename;}
+    public File_Handling(String filename) {
+        this.filename = filename;
+    }
 
     public void ReadFromFile() {
         try {
@@ -33,12 +35,12 @@ public class File_Handling {
             System.out.println("File size in bytes " + fmanager.length());
             Scanner myReader = new Scanner(fmanager);
             String data;
-            while(myReader.hasNextLine()) {
+            while (myReader.hasNextLine()) {
 
-                    data = myReader.nextLine();
-                    System.out.println(data);
-                    temporary.add(data);
-                }
+                data = myReader.nextLine();
+                System.out.println(data);
+                temporary.add(data);
+            }
 
             myReader.close();
         } catch (IOException error) {
@@ -50,18 +52,18 @@ public class File_Handling {
     public LinkedList<String> getData() {
         return temporary;
     }
-    
-    public void SaveToFile(Student_Database student_database){
+
+    public void SaveToFile(Student_Database student_database) {
         File fmanager = new File(filename);
-        try (PrintWriter writer = new PrintWriter(new FileWriter(fmanager, true))) {
-            for (Student i:student_database
-                 ) {
-                writer.println(i.getMatric_no()+" "+i.getName()+" "+i.getCubic_id()+" "+i.getCheckdate()+" "+i.getSupervisor());
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fmanager, false))) {
+            for (Student i : student_database
+            ) {
+                writer.println(i.getMatric_no() + " " + i.getName() + " " + i.getCubic_id() + " " + i.getCheckdate() + " " + i.getSupervisor());
             }
 
         } catch (IOException e) {
 
-
         }
+
     }
 }
