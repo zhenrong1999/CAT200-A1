@@ -1,8 +1,12 @@
 package CAT200;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.text.ParseException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -54,24 +58,37 @@ public class Student {
         System.out.println(matric_no.get() + " " + name.get() + " " + cubic_id.get() + " " + checkdate.get() + " " + supervisor.get());
     }
 
-    public boolean validation(){
+    public boolean validation() {
         Boolean valid = true;
         try {
             //Validate the cubical id, 1-3 for first char, A-M for 2nd char, 1-6 for 3rd char
-            if(cubic_id.get().length() != 3 || matric_no.get().length()!=6)
+            if (cubic_id.get().length() != 3 || matric_no.get().length() != 6)
                 valid = false;
             int lab_id = Character.getNumericValue(cubic_id.get().charAt(0));
             //convert char to int
             char row = cubic_id.get().charAt(1);
             int column = Character.getNumericValue(cubic_id.get().charAt(2));
-            if(lab_id > 3 || lab_id < 1 || ((int)row) < 65 || ((int)row) > 77 || column < 1 || column > 6)
+            if (lab_id > 3 || lab_id < 1 || ((int) row) < 65 || ((int) row) > 77 || column < 1 || column > 6)
                 valid = false;
             int a = Integer.parseInt(matric_no.get());
             Date d1 = new SimpleDateFormat("dd-MM-yyyy").parse(checkdate.get());
-        } catch (NumberFormatException e) {
+        } catch (/*NumberFormatException | ParseException | */Exception e) {
             valid = false;
-        }catch (ParseException e) {
-            valid = false;
+
+            Stage error = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("errorWindow.fxml"));
+            Parent root = null;
+            try {
+                root = loader.load();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            error.setTitle("Error");
+            Scene scene = new Scene(root, 600, 400);
+            error.setScene(scene);
+            error.show();
+
+            System.out.println("Error In Student");
         }
         return valid;
     }

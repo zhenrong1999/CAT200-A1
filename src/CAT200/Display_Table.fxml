@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
-<AnchorPane prefHeight="358.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CAT200.DisplayTableControl">
-   <children>
-       <TableView fx:id="tableofstudents" editable="true" layoutY="35.0" prefHeight="337.0" prefWidth="600.0">
-           <columns>
-               <TableColumn fx:id="matric_column" prefWidth="75.0" text="No. Matric" />
-               <TableColumn fx:id="name_column" prefWidth="75.0" text="Name" />
-               <TableColumn fx:id="cubicle_column" prefWidth="75.0" text="Cubicle ID" />
-               <TableColumn fx:id="date_column" prefWidth="75.0" text="Check in date" />
-               <TableColumn fx:id="superisor_column" prefWidth="75.0" text="Supervisor" />
-           </columns>
-       </TableView>
-      <Label layoutX="234.0" layoutY="14.0" text="List of Student" textAlignment="CENTER">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-   </children>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="pane_table" prefHeight="358.0" prefWidth="600.0"
+            xmlns="http://javafx.com/javafx/8" fx:controller="CAT200.DisplayTableControl">
+    <children>
+        <TableView fx:id="tableofstudents" editable="true" layoutY="35.0" prefHeight="337.0" prefWidth="600.0">
+            <columns>
+                <TableColumn fx:id="matric_column" prefWidth="75.0" text="No. Matric"/>
+                <TableColumn fx:id="name_column" prefWidth="75.0" text="Name"/>
+                <TableColumn fx:id="cubicle_column" prefWidth="75.0" text="Cubicle ID"/>
+                <TableColumn fx:id="date_column" prefWidth="75.0" text="Check in date"/>
+                <TableColumn fx:id="superisor_column" prefWidth="75.0" text="Supervisor"/>
+            </columns>
+        </TableView>
+        <Label fx:id="label_list_of_student" layoutX="234.0" layoutY="14.0" text="List of Student"
+               textAlignment="CENTER">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+    </children>
 </AnchorPane>
