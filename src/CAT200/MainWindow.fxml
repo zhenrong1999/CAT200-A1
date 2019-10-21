@@ -1,73 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
-<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CAT200.MainWindowController">
-   <children>
-      <AnchorPane fx:id="side_menu" prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #c299fc;">
-         <children>
-            <AnchorPane fx:id="small_side_menu" prefHeight="430.0" prefWidth="45.0" style="-fx-background-color: #9852f9;" />
-             <Button fx:id="Home" layoutY="115.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Home" textAlignment="RIGHT" />
-             <Button fx:id="Add" layoutY="165.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Add Student" textAlignment="RIGHT" />
-            <Button fx:id="Search" layoutY="215.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Search or Edit" textAlignment="RIGHT" />
-            <Button fx:id="Exit" layoutY="265.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Exit" textAlignment="RIGHT" />
-         </children>
-      </AnchorPane>
-      <AnchorPane fx:id="content" layoutX="199.0" prefHeight="430.0" prefWidth="501.0" style="-fx-background-color: #6807f9;">
-         <children>
+    <children>
+        <AnchorPane fx:id="side_menu" prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #c299fc;">
+            <children>
+                <AnchorPane fx:id="small_side_menu" prefHeight="430.0" prefWidth="45.0" style="-fx-background-color: #9852f9;" />
+                <Button fx:id="Home" layoutY="115.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Home" textAlignment="RIGHT" />
+                <Button fx:id="Add" layoutY="165.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Add Student" textAlignment="RIGHT" />
+                <Button fx:id="Search" layoutY="215.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Search/Edit" textAlignment="RIGHT" />
+                <Button fx:id="Exit" layoutY="265.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Exit" textAlignment="RIGHT" />
+            </children>
+        </AnchorPane>
+        <AnchorPane fx:id="content" layoutX="199.0" prefHeight="430.0" prefWidth="501.0" style="-fx-background-color: #6807f9;">
+            <children>
+                <Pane fx:id="add_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #c400c6;">
+                    <children>
+                        <TextField fx:id="cubic_id" layoutX="148.0" layoutY="26.0" />
+                        <Label layoutX="37.0" layoutY="30.0" prefHeight="17.0" prefWidth="111.0" text="Cubical ID              :" />
+                        <Label layoutX="37.0" layoutY="61.0" prefHeight="17.0" prefWidth="111.0" text="Student Name       :  " />
+                        <TextField fx:id="name" layoutX="148.0" layoutY="57.0" />
+                        <Label layoutX="37.0" layoutY="93.0" prefHeight="17.0" prefWidth="111.0" text="Matric Number      :" />
+                        <TextField fx:id="matricNum" layoutX="148.0" layoutY="89.0" />
+                        <TextField fx:id="checkdate" layoutX="148.0" layoutY="123.0" />
+                        <Label layoutX="37.0" layoutY="127.0" prefHeight="17.0" prefWidth="111.0" text="Check-in Date       :" />
+                        <Label layoutX="37.0" layoutY="159.0" prefHeight="17.0" prefWidth="111.0" text="Supervisor Name   :" />
+                        <TextField fx:id="supervisor" layoutX="148.0" layoutY="155.0" />
+                        <Button fx:id="submit" layoutX="148.0" layoutY="228.0" mnemonicParsing="false" onAction="#userClickSubmit" text="Submit" />
+                    </children>
+                </Pane>
+                <Label fx:id="Title" layoutX="14.0" layoutY="13.0" prefHeight="50.0" prefWidth="278.0" text="Home" textFill="#08b8ff">
+                    <font>
+                        <Font name="Arial" size="36.0" />
+                    </font>
+                </Label>
 
-            <Pane fx:id="home_pane" layoutX="12.0" layoutY="76.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;" />
-            <Label fx:id="Title" prefHeight="50.0" prefWidth="278.0" text="Home" textFill="#08b8ff">
-               <font>
-                  <Font name="Arial" size="36.0" />
-               </font>
-            </Label>
-            <Pane fx:id="add_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #c400c6;">
-               <children>
-                     <TextField fx:id="cubic_id" layoutX="148.0" layoutY="26.0" />
-                     <Label layoutX="37.0" layoutY="30.0" prefHeight="17.0" prefWidth="111.0" text="Cubical ID              :" />
-                     <Label layoutX="37.0" layoutY="61.0" prefHeight="17.0" prefWidth="111.0" text="Student Name       :  " />
-                     <TextField fx:id="name" layoutX="148.0" layoutY="57.0" />
-                     <Label layoutX="37.0" layoutY="93.0" prefHeight="17.0" prefWidth="111.0" text="Matric Number      :" />
-                     <TextField fx:id="matricNum" layoutX="148.0" layoutY="89.0" />
-                     <TextField fx:id="checkdate" layoutX="148.0" layoutY="123.0" />
-                     <Label layoutX="37.0" layoutY="127.0" prefHeight="17.0" prefWidth="111.0" text="Check-in Date       :" />
-                     <Label layoutX="37.0" layoutY="159.0" prefHeight="17.0" prefWidth="111.0" text="Supervisor Name   :" />
-                     <TextField fx:id="supervisor" layoutX="148.0" layoutY="155.0" />
-                     <Button fx:id="submit" layoutX="148.0" layoutY="228.0" mnemonicParsing="false" onAction="#userClickSubmit" text="Submit" />
-               </children>
-            </Pane>
-            <Pane fx:id="search_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #57007e;">
-               <children>
-                  <TextField fx:id="search_text" layoutX="138.0" layoutY="85.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="200.0" />
-                  <Button fx:id="search_button" layoutX="356.0" layoutY="85.0" mnemonicParsing="false" onMousePressed="#search_in_action" prefHeight="25.0" prefWidth="63.0" text="Search" />
-                  <ChoiceBox fx:id="type" layoutX="138.0" layoutY="36.0" prefWidth="150.0" />
-                  <Label layoutX="23.0" layoutY="38.0" text="Type:" textFill="#1edbf4">
-                     <font>
-                        <Font size="17.0" />
-                     </font></Label>
-                  <Label layoutX="23.0" layoutY="87.0" text="Search Text:" textFill="#1edbf4">
-                     <font>
-                        <Font size="17.0" />
-                     </font></Label>
-                  <TableView fx:id="search_result" layoutY="143.0" prefHeight="196.0" prefWidth="475.0">
-                    <columns>
-                      <TableColumn fx:id="matric_column" editable="false" prefWidth="75.0" sortable="false" text="No. Matric" />
-                      <TableColumn fx:id="name_column" editable="false" prefWidth="75.0" sortable="false" text="Name" />
-                        <TableColumn fx:id="cubicle_column" editable="false" prefWidth="75.0" sortable="false" text="Cubicle ID" />
-                        <TableColumn fx:id="date_column" editable="false" prefWidth="75.0" sortable="false" text="Check in date" />
-                        <TableColumn fx:id="superisor_column" editable="false" prefWidth="75.0" sortable="false" text="Supervisor" />
-                    </columns>
-                  </TableView>
-               </children>
-            </Pane>
-         </children></AnchorPane>
-   </children>
+                <Pane fx:id="home_pane" layoutX="12.0" layoutY="76.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;" />
+                <Pane fx:id="search_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #57007e;">
+                    <children>
+                        <TextField fx:id="search_text" layoutX="115.0" layoutY="85.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="159.0" />
+                        <Button fx:id="search_button" layoutX="299.0" layoutY="85.0" mnemonicParsing="false" onKeyPressed="#search_in_action" onMouseClicked="#search_in_action" prefHeight="25.0" prefWidth="63.0" text="Search" />
+                        <ChoiceBox fx:id="type" layoutX="119.0" layoutY="37.0" prefWidth="150.0" />
+                        <Label layoutX="14.0" layoutY="40.0" text="Type:" textFill="#1edbf4">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="89.0" text="Search Text:" textFill="#1edbf4">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TableView fx:id="search_result" layoutY="143.0" prefHeight="196.0" prefWidth="475.0">
+                            <columns>
+                                <TableColumn fx:id="matric_column" editable="false" prefWidth="75.0" text="No. Matric" />
+                                <TableColumn fx:id="name_column" editable="false" prefWidth="75.0" text="Name" />
+                                <TableColumn fx:id="cubicle_column" editable="false" prefWidth="75.0" text="Cubicle ID" />
+                                <TableColumn fx:id="date_column" editable="false" prefWidth="75.0" text="Check in date" />
+                                <TableColumn fx:id="superisor_column" editable="false" prefWidth="75.0" text="Supervisor" />
+                            </columns>
+                        </TableView>
+                  <Button fx:id="advanced_search" layoutX="299.0" layoutY="37.0" mnemonicParsing="false" onKeyPressed="#DisplayAdvancedSearch" onMouseClicked="#DisplayAdvancedSearch" prefHeight="25.0" prefWidth="159.0" text="Advanced Search" />
+                  <Button fx:id="display_all" layoutX="374.0" layoutY="85.0" mnemonicParsing="false" onKeyPressed="#DisplayTable" onMouseClicked="#DisplayTable" text="Display All" />
+                    </children>
+                </Pane>
+            </children>
+        </AnchorPane>
+    </children>
 </AnchorPane>

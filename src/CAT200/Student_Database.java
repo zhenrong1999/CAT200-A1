@@ -1,8 +1,5 @@
 package CAT200;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.util.Comparator;
 import java.util.LinkedList;
 
@@ -69,7 +66,7 @@ public class Student_Database extends LinkedList<Student> {
                 first = current_index + 1;
             }
             if (first == current_index || last == current_index) {
-                current_index=-1;
+                current_index = -1;
                 break;
             }
             System.out.println(current_index);
@@ -80,10 +77,9 @@ public class Student_Database extends LinkedList<Student> {
     public Student_Database searchForAll(String type, String search_item) {
         sort(type);
         String temp;
-        Student_Database result=new Student_Database();
-        boolean found=false;
-        for(Student current_student: this)
-        {
+        Student_Database result = new Student_Database();
+        boolean found = false;
+        for (Student current_student : this) {
             switch (type) {
                 case "Name Student":
                     temp = current_student.getName();
@@ -103,11 +99,11 @@ public class Student_Database extends LinkedList<Student> {
                 default:
                     throw new IllegalStateException("Unexpected value: " + type);
             }
-            if(temp.equals(search_item)){
+            if (temp.equals(search_item)) {
                 result.add(current_student);
-                found=true;
+                found = true;
             }
-            if(!temp.equals(search_item)&&found){
+            if (!temp.equals(search_item) && found) {
                 break;
             }
         }
@@ -119,7 +115,7 @@ public class Student_Database extends LinkedList<Student> {
         for (int i = 0; i < raw_data.size(); i++) {
             data_extracted = raw_data.get(i).split(" ");
             try {
-                super.add(i, new Student(data_extracted[0],data_extracted[1],data_extracted[2],data_extracted[3],data_extracted[4]));
+                super.add(i, new Student(data_extracted[0], data_extracted[1], data_extracted[2], data_extracted[3], data_extracted[4]));
             } catch (Exception e) {
                 throw new IllegalStateException("There are error in line " + i);
             }
