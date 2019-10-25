@@ -15,12 +15,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        reader.ReadFromFile(); //Read from text file
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginWindow.fxml"));
         Parent root = loader.load();
-        MainWindowController mainWindowController = loader.getController();
-        mainWindowController.student_database.addFromLinkedList(reader.getData()); //Extract raw data from the file reader into structured data
-        mainWindowController.setMainApp(this);
+        LoginWindowControl loginWindowControl = loader.getController();
+        //MainWindowController mainWindowController = loader.getController();
+        //mainWindowController.student_database.addFromLinkedList(reader.getData()); //Extract raw data from the file reader into structured data
+        loginWindowControl.setMainApp(this);
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 700, 430));
         primaryStage.show();
