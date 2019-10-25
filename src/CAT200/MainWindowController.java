@@ -8,10 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -23,20 +20,25 @@ import java.util.ResourceBundle;
 
 public class MainWindowController implements Initializable {
     Student_Database student_database = new Student_Database();     //package-private
-    private Main main;
+    private LoginWindowControl loginWindowControl;
     //For Side Menu
     @FXML
-    private Button Home, Add, Search, Exit;
+    private Button Home, Add, Search, Exit, Settings;
     @FXML
-    private Label Title;
+    private Label Title, changeStatus, createStatus;
     @FXML
-    private Pane search_pane, add_pane, home_pane;
+    private Pane search_pane, add_pane, home_pane, settings_pane, change_pane, register_pane;
     //For Add/Edit Student Info Scene
     @FXML
     private Button submit;
     @FXML
     private TextField cubic_id, name, matricNum, checkdate, supervisor;
-
+    @FXML
+    private  Button changeAdmin, registerAdmin, confirmBtn, createBtn;
+    @FXML
+    private TextField changeUser, newUser;
+    @FXML
+    private PasswordField changePwd, newPassword;
 
     //For Search Student Info Scene
     @FXML
@@ -48,8 +50,8 @@ public class MainWindowController implements Initializable {
     @FXML
     private AnchorPane table_to_display;
 
-    public void setMainApp(Main mainApp) {
-        this.main = mainApp;
+    public void setMainApp(LoginWindowControl control) {
+        this.loginWindowControl = control;
     }
 
     @FXML
@@ -63,10 +65,20 @@ public class MainWindowController implements Initializable {
         } else if (event.getSource() == Search) {
             Title.setText("Search Student");
             search_pane.toFront();
-        } else if (event.getSource() == Exit) {
+        } else if(event.getSource()==changeAdmin){
+            Title.setText("Change Admin Details");
+            change_pane.toFront();
+        } else if(event.getSource()==registerAdmin){
+            Title.setText("New Admin");
+            register_pane.toFront();
+        } else if(event.getSource()==Settings){
+            Title.setText("Admin Settings");
+            settings_pane.toFront();
+        }  else if (event.getSource() == Exit) {
             Title.setText("Exiting");
             // get a handle to the stage
-            main.reader.SaveToFile(student_database);
+            //Kee Xian
+            loginWindowControl.reader.SaveToFile(student_database);
             Stage stage = (Stage) Exit.getScene().getWindow();
             stage.close();
         }
@@ -81,7 +93,8 @@ public class MainWindowController implements Initializable {
         supervisor.setText("");
         if (newStud.validation()) {
             student_database.add(newStud);
-            main.reader.SaveToFile(student_database);
+            //Kee Xian
+            loginWindowControl.reader.SaveToFile(student_database);
         }
     }
 
@@ -124,10 +137,48 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
+    //Kee Xian
+    //confirm the changes for the username and password
+    //get username and pwd from textfield
+    public void userConfirmsChange(ActionEvent event){
+        for(int i=0; i<loginWindowControl.adminList.size(); i++){
+            //Delete ori from linkedlist, the insert a new one
+            if(loginWindowControl.user.equals(loginWindowControl.adminList.get(i).getName())){
+                loginWindowControl.adminList.remove(i);
+                AdminInfo newAdmin = new AdminInfo(changeUser.getText(), changePwd.getText());
+                loginWindowControl.user=changeUser.getText();
+                loginWindowControl.pwd=changePwd.getText();
+                loginWindowControl.adminList.add(newAdmin);
+                changeStatus.setText("Change Successful");
+                changeStatus.setVisible(true);
+            }
+        }
+        loginWindowControl.file_handling.SaveToFile(loginWindowControl.adminList);
+        loginWindowControl.printLinkedList();
+    }
+
+    //Create new admin
+    //At settings->register new admin->enter your name and password->click submit
+    public void registerNewAdmin(ActionEvent event){
+        AdminInfo newAdmin = new AdminInfo(newUser.getText(), newPassword.getText());
+        if(loginWindowControl.adminList.contains(newAdmin)){ //if admin info exists
+            createStatus.setText("Admin exists. Please try again");
+            createStatus.setVisible(true);
+        } else {
+            createStatus.setText("New Admin creation successful!!! Welcome " + newUser.getText());
+            createStatus.setVisible(true);
+            loginWindowControl.adminList.add(newAdmin);
+        }
+        loginWindowControl.file_handling.SaveToFile(loginWindowControl.adminList);
+        loginWindowControl.printLinkedList();
+    }
+    //Kee Xian
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[] typelist = {"Cubicle ID", "Name Student", "Matric number", "Check in date", "Supervisor"};
         type.setItems(FXCollections.observableArrayList(typelist));
+        changeStatus.setVisible(false); //Kee Xian
+        createStatus.setVisible(false);
         home_pane.toFront();
     }
 }
