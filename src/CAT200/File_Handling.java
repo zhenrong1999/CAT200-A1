@@ -66,4 +66,17 @@ public class File_Handling {
         }
 
     }
+
+    public void SaveToFile(LinkedList<AdminInfo> adminInfos) {
+        File fmanager = new File(filename);
+        try (PrintWriter writer = new PrintWriter(new FileWriter(fmanager, false))) {
+            for (AdminInfo i : adminInfos
+            ) {
+                writer.println(i.getName() + " " +  i.getPassword());
+            }
+        } catch (IOException e) {
+
+        }
+
+    }
 }
