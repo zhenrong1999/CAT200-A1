@@ -11,7 +11,11 @@ public class ErrorWindowController {
     @FXML
     private Button OkayButton;
 
-    private void close_window() {
+    public void setError_text(String error_message){
+        error_text.setText(error_message);
+    }
+
+    public void close_window() {
         Stage stage = (Stage) OkayButton.getScene().getWindow();
         stage.close();
     }
