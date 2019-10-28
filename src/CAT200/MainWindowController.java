@@ -12,12 +12,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 
@@ -90,7 +87,7 @@ public class MainWindowController implements Initializable {
     }
 
     public void userClickSubmit() {
-        Student newStud = new Student(matricNum.getText(), name.getText(), cubic_id.getText(), date_converter.toString(checkdate.getValue()), supervisor.getText());
+        Student newStud = new Student(matricNum.getText(), name.getText(), cubic_id.getText(), Student_Database.date_converter.toString(checkdate.getValue()), supervisor.getText());
         String error_message=newStud.validation();
         if (error_message.equals("")) {
             student_database.add(newStud);
@@ -129,7 +126,7 @@ public class MainWindowController implements Initializable {
         }
         DisplayTableControl control = loader.getController();
         control.pane_table.setPrefSize(452, 200);
-        control.tableofstudents.setPrefSize(452, 150);
+        control.table_of_students.setPrefSize(452, 150);
         control.label_list_of_student.setLayoutX(150);
         control.SetToDisplay(result);
     }
@@ -202,28 +199,6 @@ public class MainWindowController implements Initializable {
         changeStatus.setVisible(false); //Kee Xian
         createStatus.setVisible(false);
         home_pane.toFront();
-        checkdate.setConverter(date_converter);
+        checkdate.setConverter(Student_Database.date_converter);
     }
-
-    public StringConverter<LocalDate> date_converter = new StringConverter<LocalDate>() {
-        String pattern = "dd-MM-yyyy";
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
-        @Override
-        public String toString(LocalDate localDate) {
-            if (localDate != null) {
-                return dateFormatter.format(localDate);
-            } else {
-                return "";
-            }
-        }
-
-        @Override
-        public LocalDate fromString(String s) {
-            if (s != null && !s.isEmpty()) {
-                return LocalDate.parse(s, dateFormatter);
-            } else {
-                return null;
-            }
-        }
-    };
 }

@@ -1,16 +1,18 @@
 package CAT200;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.util.StringConverter;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class AdvanceSearchControl implements Initializable {
@@ -23,15 +25,25 @@ public class AdvanceSearchControl implements Initializable {
     private CheckBox check_matric, check_name, check_cubicle_id, check_check_date, check_supervisor;
 
     private MainWindowController mainWindowController;
-    void setMainWindowControllerController(MainWindowController mainWindowController){
-        this.mainWindowController=mainWindowController;
-    }
-    public  void initialize(URL url, ResourceBundle resourceBundle)  {
-        start_date.setConverter(mainWindowController.date_converter);
-        end_date.setConverter(mainWindowController.date_converter);
+
+    void setMainWindowControllerController(MainWindowController mainWindowController) {
+        this.mainWindowController = mainWindowController;
+
     }
 
-    public void search_action() {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        start_date.setConverter(Student_Database.date_converter);
+        end_date.setConverter(Student_Database.date_converter);
+    }
+
+    public void after_key_in() {
+        if (end_date.getValue() == null) {
+            end_date.setValue(start_date.getValue());
+        } else if (end_date.getValue().compareTo(start_date.getValue()) <= 0)
+            end_date.setValue(start_date.getValue());
+    }
+
+    public void search_action() throws IOException {
         boolean[] check_type = new boolean[5];
         check_type[0] = check_matric.isSelected();
         check_type[1] = check_name.isSelected();
@@ -41,22 +53,36 @@ public class AdvanceSearchControl implements Initializable {
         String search_item = "";
         if (check_type[0]) {
             search_item += matric_text.getText();
-        } else{search_item += ",";}
+        }
+        search_item += ",";
         if (check_type[1]) {
             search_item += name_text.getText();
-        } else{search_item += ",";}
+        }
+        search_item += ",";
         if (check_type[2]) {
             search_item += cubic_id_text.getText();
-        } else{search_item += ",";}
+        }
+        search_item += ",";
         if (check_type[3]) {
-            search_item += mainWindowController.date_converter.toString(start_date.getValue())+",";
-            search_item += mainWindowController.date_converter.toString(end_date.getValue());
-        } else{search_item += ",";}
+            search_item += Student_Database.date_converter.toString(start_date.getValue()) + ",";
+            search_item += Student_Database.date_converter.toString(end_date.getValue());
+        }
+        search_item += ",";
         if (check_type[4]) {
             search_item += supervisor_text.getText();
-        } else{search_item += ",";}
-        if(!search_item.equals(",,,,,,")){
-            //mainWindowController.student_database.searchForAllwithMultiple(search_item);
+        }
+        search_item += ",";
+        if (!search_item.equals(",,,,,,")) {
+            Student_Database result = mainWindowController.student_database.searchForAllwithMultiple(search_item);
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));
+            Parent root = loader.load();
+            DisplayTableControl control = loader.getController();
+            control.SetToDisplay(result);
+            Scene scene = new Scene(root, 600, 400);
+            stage.setTitle("Display All Student Information");
+            stage.setScene(scene);
+            stage.show();
         }
     }
 }
