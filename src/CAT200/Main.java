@@ -18,7 +18,7 @@ public class Main extends Application {
         Parent root = loader.load();
         LoginWindowControl loginWindowControl = loader.getController();
         loginWindowControl.setMainApp(this);
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Login Page");
         primaryStage.setScene(new Scene(root, 700, 430));
         primaryStage.show();
     }

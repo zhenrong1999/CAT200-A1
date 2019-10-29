@@ -11,17 +11,20 @@
     <children>
         <TableView fx:id="table_of_students" editable="true" layoutY="35.0" maxWidth="1000.0" prefHeight="358.0" prefWidth="600.0">
             <columns>
-                <TableColumn fx:id="matric_column" prefWidth="75.0" text="No. Matric" />
-                <TableColumn fx:id="name_column" prefWidth="75.0" text="Name" />
-                <TableColumn fx:id="cubicle_column" prefWidth="75.0" text="Cubicle ID" />
-                <TableColumn fx:id="date_column" prefWidth="75.0" text="Check in date" />
-                <TableColumn fx:id="supervisor_column" prefWidth="75.0" text="Supervisor" />
+                <TableColumn fx:id="matric_column" onEditCommit="#onEditChanged" prefWidth="75.0" text="No. Matric" />
+                <TableColumn fx:id="name_column" onEditCommit="#onEditChanged" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="cubicle_column" onEditCommit="#onEditChanged" prefWidth="75.0" text="Cubicle ID" />
+                <TableColumn fx:id="date_column" onEditCommit="#onEditChanged" prefWidth="75.0" text="Check in date" />
+                <TableColumn fx:id="supervisor_column" onEditCommit="#onEditChanged" prefWidth="75.0" text="Supervisor" />
+            <TableColumn fx:id="to_delete_column" prefWidth="75.0" text="To Detele" />
             </columns>
         </TableView>
-        <Label fx:id="label_list_of_student" layoutX="234.0" layoutY="14.0" text="List of Student" textAlignment="CENTER">
+        <Label fx:id="label_list_of_student" layoutX="1.0" layoutY="1.0" prefHeight="36.0" prefWidth="254.0" text="To edit double click on the Item to edit and press enter to confirm." wrapText="true">
             <font>
-                <Font size="18.0" />
+                <Font size="14.0" />
             </font>
         </Label>
+      <Button fx:id="discard_button"  layoutX="255.0" layoutY="7.0" mnemonicParsing="false" onAction="#discard_changes" text="Discard changes" />
+      <Button fx:id="delete_button" layoutX="384.0" layoutY="7.0" mnemonicParsing="false" onAction="#to_delete" text="Delete" />
     </children>
 </AnchorPane>

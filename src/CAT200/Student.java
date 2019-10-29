@@ -1,6 +1,7 @@
 package CAT200;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.CheckBox;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,37 +14,66 @@ public class Student {
     private SimpleStringProperty matric_no = new SimpleStringProperty();
     private SimpleStringProperty checkdate = new SimpleStringProperty();
     private SimpleStringProperty supervisor = new SimpleStringProperty();
+    private CheckBox checkbox=new CheckBox();
 
     public Student(String name) {
         this.name.set(name);
     }
 
-    public Student(String matricno, String name, String cubic_id, String checkdate, String supervisor) {
-        setData(matricno, name, cubic_id, checkdate, supervisor);
+    public Student(String matric_no, String name, String cubic_id, String checkdate, String supervisor) {
+        setData(matric_no, name, cubic_id, checkdate, supervisor);
     }
 
     public String getCheckdate() {
         return checkdate.get();
     }
 
+    public void setCheckdate(String checkdate) {
+        this.checkdate.set(checkdate);
+    }
+
     public String getCubic_id() {
         return cubic_id.get();
+    }
+
+    public void setCubic_id(String cubic_id) {
+        this.cubic_id.set(cubic_id);
     }
 
     public String getMatric_no() {
         return matric_no.get();
     }
 
+    public void setMatric_no(String matric_no) {
+        this.matric_no.set(matric_no);
+    }
+
     public String getName() {
         return name.get();
+    }
+
+    public void setName(String name) {
+        this.name.set(name);
     }
 
     public String getSupervisor() {
         return supervisor.get();
     }
 
-    public void setData(String matricno, String name, String cubic_id, String checkdate, String supervisor) {
-        this.matric_no.set(matricno);
+    public void setSupervisor(String supervisor) {
+        this.supervisor.set(supervisor);
+    }
+
+    public CheckBox getCheckbox() {
+        return checkbox;
+    }
+
+    public void setCheckbox(CheckBox checkbox) {
+        this.checkbox = checkbox;
+    }
+
+    public void setData(String matric_no, String name, String cubic_id, String checkdate, String supervisor) {
+        this.matric_no.set(matric_no);
         this.name.set(name);
         this.cubic_id.set(cubic_id);
         this.checkdate.set(checkdate);
@@ -120,12 +150,16 @@ public class Student {
                 valid += "Date cannot be empty\n";
             }
 
-            if(getSupervisor().length()<=0)
-                valid+="Supervisor's Name cannot be empty\n";
+            if (getSupervisor().length() <= 0)
+                valid += "Supervisor's Name cannot be empty\n";
 
         } catch (Exception e) {
             valid += "Failed to add the student\n";
         }
         return valid;
+    }
+
+    public  Student clone(){
+        return new Student(getMatric_no(), getName(), getCubic_id(), getCheckdate(), getSupervisor());
     }
 }

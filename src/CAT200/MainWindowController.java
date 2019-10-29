@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 
 public class MainWindowController implements Initializable {
-    Student_Database student_database = new Student_Database();     //package-private
+    static  Student_Database student_database = new Student_Database();     //package-private
     private LoginWindowControl loginWindowControl;
     //For Side Menu
     @FXML
@@ -34,9 +34,9 @@ public class MainWindowController implements Initializable {
     @FXML
     private TextField cubic_id, name, matricNum, supervisor;
     @FXML
-    private  DatePicker checkdate;
+    private DatePicker checkdate;
     @FXML
-    private  Button changeAdmin, registerAdmin, confirmBtn, createBtn;
+    private Button changeAdmin, registerAdmin, confirmBtn, createBtn;
     @FXML
     private TextField changeUser, newUser;
     @FXML
@@ -67,16 +67,16 @@ public class MainWindowController implements Initializable {
         } else if (event.getSource() == Search) {
             Title.setText("Search Student");
             search_pane.toFront();
-        } else if(event.getSource()==changeAdmin){
+        } else if (event.getSource() == changeAdmin) {
             Title.setText("Change Admin Details");
             change_pane.toFront();
-        } else if(event.getSource()==registerAdmin){
+        } else if (event.getSource() == registerAdmin) {
             Title.setText("New Admin");
             register_pane.toFront();
-        } else if(event.getSource()==Settings){
+        } else if (event.getSource() == Settings) {
             Title.setText("Admin Settings");
             settings_pane.toFront();
-        }  else if (event.getSource() == Exit) {
+        } else if (event.getSource() == Exit) {
             Title.setText("Exiting");
             // get a handle to the stage
             //Kee Xian
@@ -88,7 +88,7 @@ public class MainWindowController implements Initializable {
 
     public void userClickSubmit() {
         Student newStud = new Student(matricNum.getText(), name.getText(), cubic_id.getText(), Student_Database.date_converter.toString(checkdate.getValue()), supervisor.getText());
-        String error_message=newStud.validation();
+        String error_message = newStud.validation();
         if (error_message.equals("")) {
             student_database.add(newStud);
             cubic_id.setText("");
@@ -98,46 +98,53 @@ public class MainWindowController implements Initializable {
             supervisor.setText("");
             //Kee Xian
             loginWindowControl.reader.SaveToFile(student_database);
-        }else{
-            try {
-                Stage error = new Stage();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("errorWindow.fxml"));
-                Parent root = loader.load();
-                ErrorWindowController controller = loader.getController();
-                controller.setError_text(error_message);
-                error.setTitle("Error");
-                Scene scene = new Scene(root, 600, 400);
-                error.setScene(scene);
-                error.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+        } else {
+
+            error_message_box(error_message);
             System.out.println("Error In Student");
         }
     }
 
-    public void search_in_action() {
-        Student_Database result = student_database.searchForAll(type.getValue(), search_text.getText());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));
+    void error_message_box(String error_message) {
         try {
-            table_to_display.getChildren().setAll((AnchorPane) loader.load());
+            Stage error = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("errorWindow.fxml"));
+            Parent root = loader.load();
+            ErrorWindowController controller = loader.getController();
+            controller.setError_text(error_message);
+            error.setTitle("Error");
+            Scene scene = new Scene(root, 600, 400);
+            error.setScene(scene);
+            error.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        DisplayTableControl control = loader.getController();
-        control.pane_table.setPrefSize(452, 200);
-        control.table_of_students.setPrefSize(452, 150);
-        control.label_list_of_student.setLayoutX(150);
-        control.SetToDisplay(result);
     }
+
+
+    public void search_in_action() {
+
+        try {
+            FXMLLoader display_table_loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));
+            table_to_display.getChildren().setAll((AnchorPane) display_table_loader.load());
+            DisplayTableControl display_table_controller = display_table_loader.getController();
+            display_table_controller.setMainWindowController(this);
+            display_table_controller.pane_table.setPrefSize(452, 200);
+            display_table_controller.table_of_students.setPrefSize(452, 150);
+            display_table_controller.SetToDisplay(type.getValue(), search_text.getText());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+            }
 
 
     public void DisplayTable() throws IOException {
         Stage stage = new Stage();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));
-        Parent root = loader.load();
-        DisplayTableControl control = loader.getController();
-        control.SetToDisplay(student_database);
+        FXMLLoader display_table_loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));
+        Parent root = display_table_loader.load();
+        DisplayTableControl display_table_controller = display_table_loader.getController();
+        display_table_controller.setMainWindowController(this);
+        display_table_controller.SetToDisplay("Display All","");
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("Display All Student Information");
         stage.setScene(scene);
@@ -159,14 +166,14 @@ public class MainWindowController implements Initializable {
     //Kee Xian
     //confirm the changes for the username and password
     //get username and pwd from textfield
-    public void userConfirmsChange(ActionEvent event){
-        for(int i=0; i<loginWindowControl.adminList.size(); i++){
+    public void userConfirmsChange(ActionEvent event) {
+        for (int i = 0; i < loginWindowControl.adminList.size(); i++) {
             //Delete ori from linkedlist, the insert a new one
-            if(loginWindowControl.user.equals(loginWindowControl.adminList.get(i).getName())){
+            if (loginWindowControl.user.equals(loginWindowControl.adminList.get(i).getName())) {
                 loginWindowControl.adminList.remove(i);
                 AdminInfo newAdmin = new AdminInfo(changeUser.getText(), changePwd.getText());
-                loginWindowControl.user=changeUser.getText();
-                loginWindowControl.pwd=changePwd.getText();
+                loginWindowControl.user = changeUser.getText();
+                loginWindowControl.pwd = changePwd.getText();
                 loginWindowControl.adminList.add(newAdmin);
                 changeStatus.setText("Change Successful");
                 changeStatus.setVisible(true);
@@ -178,9 +185,9 @@ public class MainWindowController implements Initializable {
 
     //Create new admin
     //At settings->register new admin->enter your name and password->click submit
-    public void registerNewAdmin(ActionEvent event){
+    public void registerNewAdmin(ActionEvent event) {
         AdminInfo newAdmin = new AdminInfo(newUser.getText(), newPassword.getText());
-        if(loginWindowControl.adminList.contains(newAdmin)){ //if admin info exists
+        if (loginWindowControl.adminList.contains(newAdmin)) { //if admin info exists
             createStatus.setText("Admin exists. Please try again");
             createStatus.setVisible(true);
         } else {
@@ -191,10 +198,11 @@ public class MainWindowController implements Initializable {
         loginWindowControl.file_handling.SaveToFile(loginWindowControl.adminList);
         loginWindowControl.printLinkedList();
     }
+
     //Kee Xian
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String[] typelist = {"Cubicle ID", "Name Student", "Matric number", "Check in date", "Supervisor"};
+        String[] typelist = {"Matric number", "Name Student", "Cubicle ID", "Check in date", "Supervisor"};
         type.setItems(FXCollections.observableArrayList(typelist));
         changeStatus.setVisible(false); //Kee Xian
         createStatus.setVisible(false);

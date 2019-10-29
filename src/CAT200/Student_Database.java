@@ -11,6 +11,27 @@ import java.util.LinkedList;
 public class Student_Database extends LinkedList<Student> {
 
     public static String pattern = "dd-MM-yyyy";
+    public static StringConverter<LocalDate> date_converter = new StringConverter<LocalDate>() {
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
+
+        @Override
+        public String toString(LocalDate localDate) {
+            if (localDate != null) {
+                return dateFormatter.format(localDate);
+            } else {
+                return "";
+            }
+        }
+
+        @Override
+        public LocalDate fromString(String s) {
+            if (s != null && !s.isEmpty()) {
+                return LocalDate.parse(s, dateFormatter);
+            } else {
+                return null;
+            }
+        }
+    };
 
     public void sort(String type) {
         switch (type) {
@@ -116,7 +137,6 @@ public class Student_Database extends LinkedList<Student> {
         return result;
     }
 
-
     public Student_Database searchForAllwithMultiple(String search_item) {
         String[] temp = search_item.split(",");
         Student_Database result = (Student_Database) this.clone();
@@ -179,7 +199,6 @@ public class Student_Database extends LinkedList<Student> {
         return result;
     }
 
-
     public void addFromLinkedList(LinkedList<String> raw_data) {
         String[] data_extracted;
         String valid;
@@ -200,25 +219,14 @@ public class Student_Database extends LinkedList<Student> {
         System.out.println("No. of errors : " + error);
     }
 
-    public static StringConverter<LocalDate> date_converter = new StringConverter<LocalDate>() {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
-        @Override
-        public String toString(LocalDate localDate) {
-            if (localDate != null) {
-                return dateFormatter.format(localDate);
-            } else {
-                return "";
-            }
+    public Student_Database deep_clone() {
+        Student_Database clone = new Student_Database();
+        for (Student student : this) {
+            clone.add(student.clone());
         }
 
-        @Override
-        public LocalDate fromString(String s) {
-            if (s != null && !s.isEmpty()) {
-                return LocalDate.parse(s, dateFormatter);
-            } else {
-                return null;
-            }
-        }
-    };
+        return clone;
+    }
+
 
 }

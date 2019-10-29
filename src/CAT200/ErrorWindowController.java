@@ -11,7 +11,7 @@ public class ErrorWindowController {
     @FXML
     private Button OkayButton;
 
-    public void setError_text(String error_message){
+    public void setError_text(String error_message) {
         error_text.setText(error_message);
     }
 

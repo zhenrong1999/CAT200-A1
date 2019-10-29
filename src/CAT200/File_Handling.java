@@ -72,7 +72,7 @@ public class File_Handling {
         try (PrintWriter writer = new PrintWriter(new FileWriter(fmanager, false))) {
             for (AdminInfo i : adminInfos
             ) {
-                writer.println(i.getName() + " " +  i.getPassword());
+                writer.println(i.getName() + " " + i.getPassword());
             }
         } catch (IOException e) {
 

@@ -73,12 +73,11 @@ public class AdvanceSearchControl implements Initializable {
         }
         search_item += ",";
         if (!search_item.equals(",,,,,,")) {
-            Student_Database result = mainWindowController.student_database.searchForAllwithMultiple(search_item);
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));
             Parent root = loader.load();
             DisplayTableControl control = loader.getController();
-            control.SetToDisplay(result);
+            control.SetToDisplay("ALL",search_item);
             Scene scene = new Scene(root, 600, 400);
             stage.setTitle("Display All Student Information");
             stage.setScene(scene);

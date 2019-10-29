@@ -4,15 +4,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.control.DatePicker?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CAT200.MainWindowController">
     <children>
@@ -23,7 +14,7 @@
                 <Button fx:id="Add" layoutY="165.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Add Student" textAlignment="RIGHT" />
                 <Button fx:id="Search" layoutY="215.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Search" textAlignment="RIGHT" />
                 <Button fx:id="Exit" layoutY="315.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Exit" textAlignment="RIGHT" />
-            <Button fx:id="Settings" layoutY="265.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Settings" textAlignment="RIGHT" />
+                <Button fx:id="Settings" layoutY="265.0" mnemonicParsing="false" onAction="#handlebuttonaction" prefHeight="50.0" prefWidth="200.0" style="-fx-background-color: #ffd739;" text="Settings" textAlignment="RIGHT" />
             </children>
         </AnchorPane>
         <AnchorPane fx:id="content" layoutX="199.0" prefHeight="430.0" prefWidth="501.0" style="-fx-background-color: #6807f9;">
@@ -35,43 +26,25 @@
                 </Label>
 
                 <Pane fx:id="home_pane" layoutX="12.0" layoutY="76.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;" />
-            <Pane fx:id="change_pane" layoutX="14.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;">
-               <children>
-                  <Label layoutX="31.0" layoutY="32.0" text="New Username : " />
-                  <TextField fx:id="changeUser" layoutX="31.0" layoutY="57.0" prefHeight="25.0" prefWidth="356.0" />
-                  <Label layoutX="31.0" layoutY="118.0" text="New Password :" />
-                  <Label fx:id="changeStatus" layoutX="92.0" layoutY="275.0" prefHeight="42.0" prefWidth="278.0" text="Label" textFill="#e81414">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Label>
-                  <Button fx:id="confirmBtn" layoutX="121.0" layoutY="211.0" mnemonicParsing="false" onAction="#userConfirmsChange" text="Confirm Changes" />
-                  <PasswordField fx:id="changePwd" layoutX="31.0" layoutY="158.0" prefHeight="25.0" prefWidth="356.0" />
-               </children>
-            </Pane>
-            <Pane fx:id="settings_pane" layoutX="14.0" layoutY="76.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;">
-               <children>
-                  <Button fx:id="changeAdmin" layoutX="176.0" layoutY="128.0" mnemonicParsing="false" onAction="#handlebuttonaction" text="Change Admin Details" />
-                  <Button fx:id="registerAdmin" layoutX="180.0" layoutY="171.0" mnemonicParsing="false" onAction="#handlebuttonaction" text="Register New Admin" />
-               </children>
-            </Pane>
-            <Pane fx:id="register_pane" layoutX="14.0" layoutY="74.0" prefHeight="345.0" prefWidth="475.0" style="-fx-background-color: #9852f9;">
-               <children>
-                  <Label layoutX="39.0" layoutY="71.0" text="New Username : " />
-                  <TextField fx:id="newUser" layoutX="39.0" layoutY="101.0" prefHeight="25.0" prefWidth="343.0" promptText="username" />
-                  <Label layoutX="39.0" layoutY="24.0" text="NEW ADMIN" underline="true">
-                     <font>
-                        <Font name="Times New Roman" size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="39.0" layoutY="164.0" text="New Password" />
-                  <PasswordField fx:id="newPassword" layoutX="36.0" layoutY="192.0" prefHeight="25.0" prefWidth="343.0" promptText="password" />
-                  <Label fx:id="createStatus" layoutX="36.0" layoutY="279.0" prefHeight="42.0" prefWidth="378.0" text="Label" textFill="#eb0c0c">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Label>
-                  <Button fx:id="createBtn" layoutX="169.0" layoutY="235.0" mnemonicParsing="false" onAction="#registerNewAdmin" text="Create" />
-               </children>
-            </Pane>
+                <Pane fx:id="register_pane" layoutX="14.0" layoutY="74.0" prefHeight="345.0" prefWidth="475.0" style="-fx-background-color: #9852f9;">
+                    <children>
+                        <Label layoutX="39.0" layoutY="71.0" text="New Username : " />
+                        <TextField fx:id="newUser" layoutX="39.0" layoutY="101.0" prefHeight="25.0" prefWidth="343.0" promptText="username" />
+                        <Label layoutX="39.0" layoutY="24.0" text="NEW ADMIN" underline="true">
+                            <font>
+                                <Font name="Times New Roman" size="24.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="39.0" layoutY="164.0" text="New Password" />
+                        <PasswordField fx:id="newPassword" layoutX="36.0" layoutY="192.0" prefHeight="25.0" prefWidth="343.0" promptText="password" />
+                        <Label fx:id="createStatus" layoutX="36.0" layoutY="279.0" prefHeight="42.0" prefWidth="378.0" text="Label" textFill="#eb0c0c">
+                            <font>
+                                <Font size="16.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="createBtn" layoutX="169.0" layoutY="235.0" mnemonicParsing="false" onAction="#registerNewAdmin" text="Create" />
+                    </children>
+                </Pane>
                 <Pane fx:id="search_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #57007e;">
                     <children>
                         <TextField fx:id="search_text" layoutX="115.0" layoutY="85.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="159.0" />
@@ -105,6 +78,26 @@
                         <Label layoutX="35.0" layoutY="159.0" prefHeight="17.0" prefWidth="150.0" text="Supervisor's Name   :" />
                         <TextField fx:id="supervisor" layoutX="178.0" layoutY="155.0" />
                         <Button fx:id="submit" layoutX="148.0" layoutY="228.0" mnemonicParsing="false" onAction="#userClickSubmit" text="Submit" />
+                    </children>
+                </Pane>
+                <Pane fx:id="settings_pane" layoutX="14.0" layoutY="76.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;">
+                    <children>
+                        <Button fx:id="changeAdmin" layoutX="176.0" layoutY="128.0" mnemonicParsing="false" onAction="#handlebuttonaction" text="Change Admin Details" />
+                        <Button fx:id="registerAdmin" layoutX="180.0" layoutY="171.0" mnemonicParsing="false" onAction="#handlebuttonaction" text="Register New Admin" />
+                    </children>
+                </Pane>
+                <Pane fx:id="change_pane" layoutX="14.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #9852f9;">
+                    <children>
+                        <Label layoutX="31.0" layoutY="32.0" text="New Username : " />
+                        <TextField fx:id="changeUser" layoutX="31.0" layoutY="57.0" prefHeight="25.0" prefWidth="356.0" />
+                        <Label layoutX="31.0" layoutY="118.0" text="New Password :" />
+                        <Label fx:id="changeStatus" layoutX="92.0" layoutY="275.0" prefHeight="42.0" prefWidth="278.0" text="Label" textFill="#e81414">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                        <Button fx:id="confirmBtn" layoutX="121.0" layoutY="211.0" mnemonicParsing="false" onAction="#userConfirmsChange" text="Confirm Changes" />
+                        <PasswordField fx:id="changePwd" layoutX="31.0" layoutY="158.0" prefHeight="25.0" prefWidth="356.0" />
                     </children>
                 </Pane>
             </children>
