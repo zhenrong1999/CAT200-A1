@@ -228,5 +228,4 @@ public class Student_Database extends LinkedList<Student> {
         return clone;
     }
 
-
 }

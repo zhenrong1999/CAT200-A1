@@ -62,7 +62,7 @@ public class File_Handling {
             }
 
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
 
     }
@@ -75,7 +75,7 @@ public class File_Handling {
                 writer.println(i.getName() + " " + i.getPassword());
             }
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
 
     }

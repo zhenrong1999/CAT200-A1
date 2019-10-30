@@ -91,6 +91,7 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    //Add Student
     public void userClickSubmit() {
         Student newStud = new Student(matricNum.getText(), name.getText(), cubic_id.getText(), Student_Database.date_converter.toString(checkdate.getValue()), supervisor.getText());
         String error_message = newStud.validation();
@@ -110,6 +111,7 @@ public class MainWindowController implements Initializable {
         }
     }
 
+    //error message pop out
     void error_message_box(String error_message) {
         try {
             Stage error = new Stage();
@@ -118,7 +120,7 @@ public class MainWindowController implements Initializable {
             ErrorWindowController controller = loader.getController();
             controller.setError_text(error_message);
             error.setTitle("Error");
-            Scene scene = new Scene(root, 600, 400);
+            Scene scene = new Scene(root, 600, 300);
             error.setScene(scene);
             error.show();
         } catch (IOException e) {
@@ -126,9 +128,8 @@ public class MainWindowController implements Initializable {
         }
     }
 
-
+//Search
     public void search_in_action() {
-
         try {
             FXMLLoader display_table_loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));
             table_to_display.getChildren().setAll((AnchorPane) display_table_loader.load());
