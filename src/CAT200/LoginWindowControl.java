@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.LinkedList;
@@ -22,7 +23,7 @@ public class LoginWindowControl implements Initializable {
     @FXML
     private Label error;
     @FXML
-    private javafx.scene.control.Button LoginBtn;
+    private javafx.scene.control.Button LoginBtn,exit_btn;
     @FXML
     private javafx.scene.control.TextField username;
     @FXML
@@ -82,6 +83,11 @@ public class LoginWindowControl implements Initializable {
             }
         }
         error.setVisible(false);
+    }
+
+    public void exit_method(){
+        Stage stage = (Stage) exit_btn.getScene().getWindow();
+        stage.close();
     }
 
 }

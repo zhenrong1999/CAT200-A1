@@ -1,0 +1,65 @@
+.side_menu{
+}
+
+.content{
+-fx-background-color: #ffffff;
+}
+
+#small_side_menu{
+-fx-background-color: #9852f9;
+}
+
+.login_page{
+ -fx-background-color: rgba(0,0,0,0);
+  -fx-text-fill: #fdf5e6;
+}
+
+.login_page Label,TextField,PasswordField{
+     -fx-text-fill: #fdf5e6;
+}
+
+.add_pane TextField, .add_pane Label{
+-fx-text-fill: #fdf5e6;
+}
+.add_pane DatePicker Button{
+-fx-text-fill: black;
+-fx-background-color:#7300b3;;
+}
+
+.add_pane DatePicker Label{
+-fx-text-fill: black;
+}
+
+.side_menu Button{
+    -fx-background-color: #ffd739;
+    -fx-text-fill: white;
+    -fx-text-alignment: RIGHT;
+    -fx-pref-height: 50.0px;
+    -fx-background-radius: 0px 10px 10px 0;
+}
+
+.side_menu Button: hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+}
+
+TextField,PasswordField,ChoiceBoxs{
+    -fx-background-radius: 0px 10px 0px 10px;
+    -fx-background-color: rgba(0,0,0,0.1);
+}
+
+Button{
+    -fx-background-color: #7300b3;
+    -fx-text-fill: white;
+    -fx-background-radius:10px;
+   -fx-font-size:14px;
+}
+
+Button: hover{
+    -fx-background-color: #ffffff;
+    -fx-text-fill: black;
+}
+
+.Table{
+ -fx-background-color: #57007e
+}

@@ -3,6 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import java.net.URL?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8"
             fx:controller="CAT200.AdvanceSearchControl">
     <children>
@@ -34,4 +35,7 @@
         </Pane>
         <Pane layoutX="4.0" layoutY="249.0" prefHeight="337.0" prefWidth="600.0"/>
     </children>
+    <stylesheets>
+        <URL value="@script.css"/>
+    </stylesheets>
 </AnchorPane>

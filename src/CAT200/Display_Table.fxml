@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="pane_table" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CAT200.DisplayTableControl">
+<?import java.net.URL?>
+<AnchorPane styleClass="Table" fx:id="pane_table" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CAT200.DisplayTableControl">
     <children>
         <TableView fx:id="table_of_students" editable="true" layoutY="35.0" maxWidth="1000.0" prefHeight="358.0" prefWidth="600.0">
             <columns>
@@ -27,4 +28,7 @@
       <Button fx:id="discard_button"  layoutX="255.0" layoutY="7.0" mnemonicParsing="false" onAction="#discard_changes" text="Discard changes" />
       <Button fx:id="delete_button" layoutX="384.0" layoutY="7.0" mnemonicParsing="false" onAction="#to_delete" text="Delete" />
     </children>
+    <stylesheets>
+        <URL value="@script.css"/>
+    </stylesheets>
 </AnchorPane>

@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:id="mainWindow" prefHeight="430.0" prefWidth="700.0"
-            style="-fx-background-color: #6807f9;" xmlns="http://javafx.com/javafx/8"
-            fx:controller="CAT200.LoginWindowControl">
+<?import java.net.URL?>
+
+<AnchorPane fx:id="mainWindow" prefHeight="430.0" prefWidth="700.0" style="-fx-background-color: #6807f9;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CAT200.LoginWindowControl">
     <children>
-        <AnchorPane layoutX="24.0" layoutY="21.0" prefHeight="387.0" prefWidth="662.0"
-                    style="-fx-background-color: #9852f9;">
-            <children>
-                <VBox alignment="TOP_CENTER" layoutX="157.0" layoutY="94.0" prefHeight="200.0" prefWidth="319.0"
-                      spacing="20.0">
-                    <children>
-                        <Label prefHeight="35.0" prefWidth="118.0" text="Login" textFill="#313c46">
-                            <font>
-                                <Font size="36.0"/>
-                            </font>
-                        </Label>
-                        <TextField fx:id="username" promptText="Username"/>
-                        <PasswordField fx:id="password" promptText="Password"/>
-                        <Button fx:id="LoginBtn" mnemonicParsing="false" onAction="#submitClicked" text="Login"
-                                textAlignment="CENTER" textFill="#110000"/>
-                    </children>
-                </VBox>
-                <Label fx:id="error" layoutX="87.0" layoutY="305.0" prefHeight="38.0" prefWidth="483.0" text="Label"
-                       textFill="#eee8e8">
+          <VBox styleClass="login_page" alignment="TOP_CENTER" layoutX="191.0" layoutY="80.0" prefHeight="200.0" prefWidth="319.0" spacing="20.0">
+              <children>
+                  <Label prefHeight="35.0" prefWidth="118.0" text="Login" textFill="#313c46">
+                      <font>
+                          <Font size="36.0" />
+                      </font>
+                  </Label>
+                  <TextField fx:id="username" promptText="Username" />
+                  <PasswordField fx:id="password" promptText="Password" />
+                  <Button fx:id="LoginBtn" mnemonicParsing="false" onAction="#submitClicked" text="Login" textAlignment="CENTER" textFill="#110000" />
+            <Button fx:id="exit_btn" mnemonicParsing="false" onAction="#exit_method" text="Exit" />
+                <Label fx:id="error" prefHeight="38.0" prefWidth="483.0" text="Label" textFill="#eee8e8">
                     <font>
-                        <Font size="18.0"/>
+                        <Font size="18.0" />
                     </font>
                 </Label>
-            </children>
-        </AnchorPane>
+              </children>
+          </VBox>
     </children>
+    <stylesheets>
+        <URL value="@script.css" />
+    </stylesheets>
 </AnchorPane>

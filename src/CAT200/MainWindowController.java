@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 
 public class MainWindowController implements Initializable {
-    static  Student_Database student_database = new Student_Database();     //package-private
+    static Student_Database student_database = new Student_Database();     //package-private
     private LoginWindowControl loginWindowControl;
     //For Side Menu
     @FXML
@@ -50,7 +50,7 @@ public class MainWindowController implements Initializable {
     @FXML
     private ChoiceBox<String> type;
     @FXML
-    private AnchorPane table_to_display;
+    private AnchorPane table_to_display, side_menu, small_side_menu;
 
     public void setMainApp(LoginWindowControl control) {
         this.loginWindowControl = control;
@@ -82,7 +82,12 @@ public class MainWindowController implements Initializable {
             //Kee Xian
             loginWindowControl.reader.SaveToFile(student_database);
             Stage stage = (Stage) Exit.getScene().getWindow();
-            stage.close();
+            Main main = new Main();
+            try {
+                main.start(stage);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -135,7 +140,7 @@ public class MainWindowController implements Initializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
-            }
+    }
 
 
     public void DisplayTable() throws IOException {
@@ -144,7 +149,7 @@ public class MainWindowController implements Initializable {
         Parent root = display_table_loader.load();
         DisplayTableControl display_table_controller = display_table_loader.getController();
         display_table_controller.setMainWindowController(this);
-        display_table_controller.SetToDisplay("Display All","");
+        display_table_controller.SetToDisplay("Display All", "");
         Scene scene = new Scene(root, 600, 400);
         stage.setTitle("Display All Student Information");
         stage.setScene(scene);
@@ -157,8 +162,8 @@ public class MainWindowController implements Initializable {
         Parent root = loader.load();
         AdvanceSearchControl control = loader.getController();
         control.setMainWindowControllerController(this);
-        Scene scene = new Scene(root, 600, 400);
-        stage.setTitle("Display All Student Information");
+        Scene scene = new Scene(root, 600, 300);
+        stage.setTitle("Advanced Search");
         stage.setScene(scene);
         stage.show();
     }
@@ -208,5 +213,41 @@ public class MainWindowController implements Initializable {
         createStatus.setVisible(false);
         home_pane.toFront();
         checkdate.setConverter(Student_Database.date_converter);
+
+
+        //side_menu.setMinWidth(45);
+        //side_menu.setPrefWidth(45);
+        //side_menu.setMaxWidth(45);
+
+        Add.setPrefWidth(45);
+        Search.setPrefWidth(45);
+        Exit.setPrefWidth(45);
+        Settings.setPrefWidth(45);
+        Home.setPrefWidth(45);
+
     }
+
+    public void side_menu_entered() {
+        side_menu.setPrefWidth(200);
+        //side_menu.setMaxWidth(200);
+        Add.setPrefWidth(200);
+        Search.setPrefWidth(200);
+        Exit.setPrefWidth(200);
+        Settings.setPrefWidth(200);
+        Home.setPrefWidth(200);
+    }
+
+    public void side_menu_exited() {
+        //side_menu.setMinWidth(45);
+        side_menu.setPrefWidth(45);
+        //side_menu.setMaxWidth(45);
+
+        Add.setPrefWidth(45);
+        Search.setPrefWidth(45);
+        Exit.setPrefWidth(45);
+        Settings.setPrefWidth(45);
+        Home.setPrefWidth(45);
+    }
+
+
 }

@@ -19,7 +19,6 @@ public class DisplayTableControl implements Initializable {
     public TableView<Student> table_of_students;
     @FXML
     public Label label_list_of_student;
-    public MainWindowController mainWindowController;
     @FXML
     private TableColumn<Object, String> matric_column;
     @FXML
@@ -34,6 +33,7 @@ public class DisplayTableControl implements Initializable {
     private TableColumn<CheckBox, Boolean> to_delete_column;
     @FXML
     private Button discard_button, delete_button;
+    private MainWindowController mainWindowController;
     private Student_Database student_database_clone;
     private boolean edited = false;
     private String search_type, search_item;
