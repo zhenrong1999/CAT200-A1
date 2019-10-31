@@ -85,8 +85,9 @@ public class Student {
         setSupervisor(supervisor);
     }
 
-    public void print() {
+    public String print() {
         System.out.println(matric_no.get() + " " + name.get() + " " + cubic_id.get() + " " + checkdate.get() + " " + supervisor.get());
+        return matric_no.get() + " " + name.get() + " " + cubic_id.get() + " " + checkdate.get() + " " + supervisor.get()+"\n";
     }
 
     public String validation() {

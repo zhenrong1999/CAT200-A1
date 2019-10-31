@@ -57,6 +57,7 @@ public class Student_Database extends LinkedList<Student> {
         }
     }
 
+    //not using
     //search for relevant data information
     public int search(String type, String search_item) {
         sort(type);
@@ -238,6 +239,7 @@ public class Student_Database extends LinkedList<Student> {
         System.out.println("No. of errors : " + error);
     }
 
+    //check whether the matric number is same with the name
     public String validation_matric_no_match_name(Student student) {
         if (!isEmpty()) {
             for (Student record_stu : student_namelist) {
@@ -254,6 +256,7 @@ public class Student_Database extends LinkedList<Student> {
         return "";
     }
 
+    //check if the date and place has been used/book
     public String validation_check_date_with_cubical(Student student) {
         sort("Check in date");
         if (!isEmpty()) {
@@ -273,7 +276,7 @@ public class Student_Database extends LinkedList<Student> {
         return "";
     }
 
-
+//not using
     public void edit_all(String mode, Student student) {
         sort("Matric number ");
 
@@ -297,6 +300,7 @@ public class Student_Database extends LinkedList<Student> {
         }
     }
 
+    //reset the student namelist
     public void resetStudent_namelist() {
         student_namelist = new LinkedList<>();
         sort("Matric number");
@@ -307,7 +311,25 @@ public class Student_Database extends LinkedList<Student> {
         }
     }
 
+    public String reValidation(){
+        Student_Database temp=new Student_Database();
+        temp.add(getFirst());
+        int i=1;
+        String Error_message="";
+        String error="";
+        while(i<size()){
+            error=temp.validation_matric_no_match_name(get(i));
+            error+=temp.validation_check_date_with_cubical(get(i));
+            if(!error.equals(""))
+            {
+                Error_message+="Error in"+get(i).print();
+                Error_message+=error;
+            }
+        }
+        return Error_message;
+    }
 
+//copy student namelist from other Student_Database
     public void setStudent_namelist(LinkedList<Student> student_namelist) {
         for (Student student : student_namelist) {
             this.student_namelist.add(student.clone());

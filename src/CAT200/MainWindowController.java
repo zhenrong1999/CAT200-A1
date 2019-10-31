@@ -95,8 +95,8 @@ public class MainWindowController implements Initializable {
     public void userClickSubmit() {
         Student newStud = new Student(matricNum.getText(), name.getText(), cubic_id.getText(), Student_Database.date_converter.toString(checkdate.getValue()), supervisor.getText());
         String error_message = newStud.validation();
-        error_message+=student_database.validation_matric_no_match_name(newStud);
-        error_message+=student_database.validation_check_date_with_cubical(newStud);
+        error_message += student_database.validation_matric_no_match_name(newStud);
+        error_message += student_database.validation_check_date_with_cubical(newStud);
         //validation returns empty string when there is no error
         if (error_message.equals("")) {
             student_database.add(newStud);
@@ -130,7 +130,7 @@ public class MainWindowController implements Initializable {
         }
     }
 
-//Search
+    //Search
     //this is used in searching for particular searching information
     public void search_in_action() {
         try {
@@ -198,9 +198,9 @@ public class MainWindowController implements Initializable {
     public void registerNewAdmin(ActionEvent event) {
         AdminInfo newAdmin = new AdminInfo(newUser.getText(), newPassword.getText());
         boolean found = false;
-        for(int i=0; i<loginWindowControl.adminList.size(); i++)
-            if(loginWindowControl.adminList.get(i).getName().equals(newUser.getText()))
-                found=true;
+        for (int i = 0; i < loginWindowControl.adminList.size(); i++)
+            if (loginWindowControl.adminList.get(i).getName().equals(newUser.getText()))
+                found = true;
 
         if (found) { //if admin info exists
             createStatus.setText("Admin exists. Please try again");
@@ -254,9 +254,14 @@ public class MainWindowController implements Initializable {
         Home.setPrefWidth(45);
     }
 
-    public void save_to_database(){
-        student_database.resetStudent_namelist();
-        loginWindowControl.reader.SaveToFile(student_database);
+    //Save to  text file
+    public void save_to_database() {
+        String error_message = student_database.reValidation();
+        if (error_message.equals(""))
+            loginWindowControl.reader.SaveToFile(student_database);
+        else {
+            error_message_box(error_message);
+        }
     }
 
 }
