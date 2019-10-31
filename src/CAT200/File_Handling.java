@@ -13,7 +13,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 //import java.io.FileNotFoundException;
-
+//this class handles all the file reading related functions
 public class File_Handling {
     private LinkedList<String> temporary = new LinkedList<String>();
     private String filename;
@@ -22,6 +22,7 @@ public class File_Handling {
         this.filename = filename;
     }
 
+    //read from textfile then ksave into a linkedlist
     public void ReadFromFile() {
         try {
             File fmanager = new File(filename);
@@ -53,6 +54,7 @@ public class File_Handling {
         return temporary;
     }
 
+    //write into database.txt
     public void SaveToFile(Student_Database student_database) {
         File fmanager = new File(filename);
         try (PrintWriter writer = new PrintWriter(new FileWriter(fmanager, false))) {
@@ -67,6 +69,7 @@ public class File_Handling {
 
     }
 
+    //write into adminFile.txt
     public void SaveToFile(LinkedList<AdminInfo> adminInfos) {
         File fmanager = new File(filename);
         try (PrintWriter writer = new PrintWriter(new FileWriter(fmanager, false))) {

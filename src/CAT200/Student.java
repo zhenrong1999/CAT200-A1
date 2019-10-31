@@ -96,10 +96,10 @@ public class Student {
                 try {
                     int temp = Integer.parseInt(matric_no.get());
                     if (temp < 0) {
-                        valid += "Matric Number cannot be negative number. \n";
+                        valid += "Matric Number cannot be negative number.\n";
                     }
                 } catch (NumberFormatException e) {
-                    valid += "Matric Number must be integer. \n";
+                    valid += "Matric Number must be integer.\n";
                 }
             } else {
                 valid += "Matric Number cannot be empty.\n";
@@ -139,7 +139,7 @@ public class Student {
             } else {
                 valid += "Cubical ID cannot be empty\n";
             }
-            //Validate Date
+            //Validate Date Format
             if (getCheckdate().length() > 0) {
                 try {
                     Date tempdate = new SimpleDateFormat("dd-MM-yyyy").parse(checkdate.get());

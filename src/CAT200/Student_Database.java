@@ -8,13 +8,14 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.LinkedList;
 
+//This is a class that acts like a database to store all booking information
 public class Student_Database extends LinkedList<Student> {
 
     public static String pattern = "dd-MM-yyyy";
     public static StringConverter<LocalDate> date_converter = new StringConverter<LocalDate>() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
 
-        @Override
+        @Override //Convert local date format to pattern format
         public String toString(LocalDate localDate) {
             if (localDate != null) {
                 return dateFormatter.format(localDate);
@@ -23,7 +24,7 @@ public class Student_Database extends LinkedList<Student> {
             }
         }
 
-        @Override
+        @Override  //convert pattern format to local date format
         public LocalDate fromString(String s) {
             if (s != null && !s.isEmpty()) {
                 return LocalDate.parse(s, dateFormatter);
@@ -33,6 +34,7 @@ public class Student_Database extends LinkedList<Student> {
         }
     };
 
+    //sort the database based on the type of information(i.e. student name)
     public void sort(String type) {
         switch (type) {
             case "Name Student":
@@ -55,6 +57,7 @@ public class Student_Database extends LinkedList<Student> {
         }
     }
 
+    //search for relevant data information
     public int search(String type, String search_item) {
         sort(type);
         int first = 0;
@@ -62,6 +65,7 @@ public class Student_Database extends LinkedList<Student> {
         int last = size() - 1;
         String temp;
         boolean finding = false;
+        //binary searching for the correct information
         do {
             current_index = (first + last) / 2;
 
@@ -99,13 +103,18 @@ public class Student_Database extends LinkedList<Student> {
             System.out.println(current_index);
         } while (!finding);
         return current_index;
+        //returns the index of the booking information in the database
     }
 
+    //searches for all related information in database and put into a new
+    //database
     public Student_Database searchForAll(String type, String search_item) {
+        //sort the data with the indicated type of info, then only retrieve
         sort(type);
         String temp;
         Student_Database result = new Student_Database();
         boolean found = false;
+        //search through the linkedlist
         for (Student current_student : this) {
             switch (type) {
                 case "Name Student":
@@ -137,6 +146,8 @@ public class Student_Database extends LinkedList<Student> {
         return result;
     }
 
+    //search the database with multiple parameters(i.e. student name and matric)
+    //advanced searching
     public Student_Database searchForAllwithMultiple(String search_item) {
         String[] temp = search_item.split(",");
         Student_Database result = (Student_Database) this.clone();
@@ -199,17 +210,22 @@ public class Student_Database extends LinkedList<Student> {
         return result;
     }
 
+    //adding new student data into the linkedlist
     public void addFromLinkedList(LinkedList<String> raw_data) {
         String[] data_extracted;
         String valid;
         int error = 0;
+        int x=0;
         for (int i = 0; i < raw_data.size(); i++) {
             data_extracted = raw_data.get(i).split(" ");
             try {
                 Student newStud = new Student(data_extracted[0], data_extracted[1], data_extracted[2], data_extracted[3], data_extracted[4]);
                 valid = newStud.validation();
-                if (valid.equals(""))
-                    super.add(i, newStud);
+                System.out.println(valid);
+                if (valid.equals("")) {
+                    super.add(x, newStud);
+                    x++;
+                }
                 else
                     error++;
             } catch (Exception e) {
@@ -219,6 +235,7 @@ public class Student_Database extends LinkedList<Student> {
         System.out.println("No. of errors : " + error);
     }
 
+    //clone the whole student database
     public Student_Database deep_clone() {
         Student_Database clone = new Student_Database();
         for (Student student : this) {

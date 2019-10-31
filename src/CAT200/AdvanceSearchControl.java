@@ -15,6 +15,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//this class handles the advanced searching method
+//users are required to key in the correct value for the parameters
+//included in the searching
 public class AdvanceSearchControl implements Initializable {
     public DatePicker start_date, end_date;
     @FXML
@@ -28,7 +31,6 @@ public class AdvanceSearchControl implements Initializable {
 
     void setMainWindowControllerController(MainWindowController mainWindowController) {
         this.mainWindowController = mainWindowController;
-
     }
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -36,6 +38,8 @@ public class AdvanceSearchControl implements Initializable {
         end_date.setConverter(Student_Database.date_converter);
     }
 
+    //if the check out date is empty or same as check in date, this
+    //function gets the data from check in data instead
     public void after_key_in() {
         if (end_date.getValue() == null) {
             end_date.setValue(start_date.getValue());
@@ -43,7 +47,10 @@ public class AdvanceSearchControl implements Initializable {
             end_date.setValue(start_date.getValue());
     }
 
+
     public void search_action() throws IOException {
+        //check whether which advanced search options are selected
+        //if checked, the admin needs to key into the textfield the relevant information
         boolean[] check_type = new boolean[5];
         check_type[0] = check_matric.isSelected();
         check_type[1] = check_name.isSelected();
@@ -72,6 +79,9 @@ public class AdvanceSearchControl implements Initializable {
             search_item += supervisor_text.getText();
         }
         search_item += ",";
+        //the search_item results in "matric,name,cubical id,check-in date,supervisor" format
+        //this is used in searching in other classes also
+        //the if statement runs if any of the field is filled up
         if (!search_item.equals(",,,,,,")) {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));

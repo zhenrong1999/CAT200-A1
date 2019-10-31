@@ -13,8 +13,8 @@ import java.net.URL;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
+//this class handles the first login page
 public class LoginWindowControl implements Initializable {
-    //Kee Xian
     public LinkedList<AdminInfo> adminList = new LinkedList<AdminInfo>();
     public File_Handling reader = new File_Handling("database.txt");
     public String user, pwd;
@@ -30,10 +30,9 @@ public class LoginWindowControl implements Initializable {
     private PasswordField password;
     @FXML
     private AnchorPane mainWindow;
-    //Kee Xian
 
-    public void setMainApp(Main a) {
-        this.main = a;
+    public void setMainApp(Main mainApp) {
+        this.main = mainApp;
     }
 
     public void printLinkedList() {
@@ -41,6 +40,7 @@ public class LoginWindowControl implements Initializable {
             adminList.get(i).print();
     }
 
+    //admin clicks login in login screen
     public void submitClicked(ActionEvent event) {
         Boolean found = false;
         for (int i = 0; i < adminList.size(); i++) {
@@ -51,7 +51,7 @@ public class LoginWindowControl implements Initializable {
             }
         }
         if (!found) {
-            error.setText("Username or password error. Please try again");
+            error.setText("Username or password error.");
             error.setVisible(true);
         } else {
             error.setText("Login Successful");

@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
+//this displays an fxml showing the error message
 public class ErrorWindowController {
     @FXML
     private TextArea error_text;
