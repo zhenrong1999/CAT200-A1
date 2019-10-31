@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
+//the main window
 public class MainWindowController implements Initializable {
     static Student_Database student_database = new Student_Database();     //package-private
     private LoginWindowControl loginWindowControl;
@@ -56,7 +56,7 @@ public class MainWindowController implements Initializable {
         this.loginWindowControl = control;
     }
 
-    @FXML
+    @FXML  //Change from different panes
     private void handlebuttonaction(ActionEvent event) {
         if (event.getSource() == Home) {
             Title.setText("Home");
@@ -79,7 +79,6 @@ public class MainWindowController implements Initializable {
         } else if (event.getSource() == Exit) {
             Title.setText("Exiting");
             // get a handle to the stage
-            //Kee Xian
             loginWindowControl.reader.SaveToFile(student_database);
             Stage stage = (Stage) Exit.getScene().getWindow();
             Main main = new Main();
@@ -95,6 +94,7 @@ public class MainWindowController implements Initializable {
     public void userClickSubmit() {
         Student newStud = new Student(matricNum.getText(), name.getText(), cubic_id.getText(), Student_Database.date_converter.toString(checkdate.getValue()), supervisor.getText());
         String error_message = newStud.validation();
+        //validation returns empty string when there is no error
         if (error_message.equals("")) {
             student_database.add(newStud);
             cubic_id.setText("");
@@ -102,16 +102,15 @@ public class MainWindowController implements Initializable {
             matricNum.setText("");
             checkdate.setValue(null);
             supervisor.setText("");
-            //Kee Xian
+            //add the new student info into textfile
             loginWindowControl.reader.SaveToFile(student_database);
         } else {
-
             error_message_box(error_message);
             System.out.println("Error In Student");
         }
     }
 
-    //error message pop out
+    //error message pop out (a new window for error handling)
     void error_message_box(String error_message) {
         try {
             Stage error = new Stage();
@@ -129,6 +128,7 @@ public class MainWindowController implements Initializable {
     }
 
 //Search
+    //this is used in searching for particular searching information
     public void search_in_action() {
         try {
             FXMLLoader display_table_loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));
@@ -143,7 +143,7 @@ public class MainWindowController implements Initializable {
         }
     }
 
-
+    //This is used to display all student information
     public void DisplayTable() throws IOException {
         Stage stage = new Stage();
         FXMLLoader display_table_loader = new FXMLLoader(getClass().getResource("Display_Table.fxml"));
@@ -157,6 +157,7 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
+    //this is used in advanced searching
     public void DisplayAdvancedSearch() throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Advanced_Search.fxml"));
@@ -169,7 +170,6 @@ public class MainWindowController implements Initializable {
         stage.show();
     }
 
-    //Kee Xian
     //confirm the changes for the username and password
     //get username and pwd from textfield
     public void userConfirmsChange(ActionEvent event) {
@@ -185,6 +185,7 @@ public class MainWindowController implements Initializable {
                 changeStatus.setVisible(true);
             }
         }
+        //save modified admin info into textfile
         loginWindowControl.file_handling.SaveToFile(loginWindowControl.adminList);
         loginWindowControl.printLinkedList();
     }
@@ -193,24 +194,29 @@ public class MainWindowController implements Initializable {
     //At settings->register new admin->enter your name and password->click submit
     public void registerNewAdmin(ActionEvent event) {
         AdminInfo newAdmin = new AdminInfo(newUser.getText(), newPassword.getText());
-        if (loginWindowControl.adminList.contains(newAdmin)) { //if admin info exists
+        boolean found = false;
+        for(int i=0; i<loginWindowControl.adminList.size(); i++)
+            if(loginWindowControl.adminList.get(i).getName().equals(newUser.getText()))
+                found=true;
+
+        if (found) { //if admin info exists
             createStatus.setText("Admin exists. Please try again");
             createStatus.setVisible(true);
         } else {
             createStatus.setText("New Admin creation successful!!! Welcome " + newUser.getText());
             createStatus.setVisible(true);
-            loginWindowControl.adminList.add(newAdmin);
+            loginWindowControl.adminList.add(newAdmin);  //adds new admin to linkedlist
         }
+        //save new admin info to textfile
         loginWindowControl.file_handling.SaveToFile(loginWindowControl.adminList);
         loginWindowControl.printLinkedList();
     }
 
-    //Kee Xian
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String[] typelist = {"Matric number", "Name Student", "Cubicle ID", "Check in date", "Supervisor"};
         type.setItems(FXCollections.observableArrayList(typelist));
-        changeStatus.setVisible(false); //Kee Xian
+        changeStatus.setVisible(false);
         createStatus.setVisible(false);
         home_pane.toFront();
         checkdate.setConverter(Student_Database.date_converter);
@@ -228,6 +234,8 @@ public class MainWindowController implements Initializable {
 
     }
 
+    //a drop-right box at the left side of the app
+    //when mouse scroll, the box expands
     public void side_menu_entered() {
         side_menu.setPrefWidth(200);
         //side_menu.setMaxWidth(200);
