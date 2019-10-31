@@ -80,13 +80,14 @@ public class MainWindowController implements Initializable {
         } else if (event.getSource() == Exit) {
             Title.setText("Exiting");
             // get a handle to the stage
-            save_to_database();
-            Stage stage = (Stage) Exit.getScene().getWindow();
-            Main main = new Main();
-            try {
-                main.start(stage);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (save_to_database()) {
+                Stage stage = (Stage) Exit.getScene().getWindow();
+                Main main = new Main();
+                try {
+                    main.start(stage);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -255,12 +256,14 @@ public class MainWindowController implements Initializable {
     }
 
     //Save to  text file
-    public void save_to_database() {
+    public boolean save_to_database() {
         String error_message = student_database.reValidation();
-        if (error_message.equals(""))
+        if (error_message.equals("")) {
             loginWindowControl.reader.SaveToFile(student_database);
-        else {
+            return true;
+        } else {
             error_message_box(error_message);
+            return false;
         }
     }
 
