@@ -80,7 +80,7 @@ public class MainWindowController implements Initializable {
         } else if (event.getSource() == Exit) {
             Title.setText("Exiting");
             // get a handle to the stage
-            loginWindowControl.reader.SaveToFile(student_database);
+            save_to_database();
             Stage stage = (Stage) Exit.getScene().getWindow();
             Main main = new Main();
             try {
