@@ -23,7 +23,7 @@ public class MainWindowController implements Initializable {
     private LoginWindowControl loginWindowControl;
     //For Side Menu
     @FXML
-    private Button Home, Add, Search, Exit, Settings;
+    private Button Home, Add, Search, Exit, Save_btn, Settings;
     @FXML
     private Label Title, changeStatus, createStatus;
     @FXML
@@ -63,6 +63,7 @@ public class MainWindowController implements Initializable {
             home_pane.toFront();
         } else if (event.getSource() == Add) {
             Title.setText("Add Student");
+            student_database.resetStudent_namelist();
             add_pane.toFront();
         } else if (event.getSource() == Search) {
             Title.setText("Search Student");
@@ -94,6 +95,8 @@ public class MainWindowController implements Initializable {
     public void userClickSubmit() {
         Student newStud = new Student(matricNum.getText(), name.getText(), cubic_id.getText(), Student_Database.date_converter.toString(checkdate.getValue()), supervisor.getText());
         String error_message = newStud.validation();
+        error_message+=student_database.validation_matric_no_match_name(newStud);
+        error_message+=student_database.validation_check_date_with_cubical(newStud);
         //validation returns empty string when there is no error
         if (error_message.equals("")) {
             student_database.add(newStud);
@@ -221,16 +224,7 @@ public class MainWindowController implements Initializable {
         home_pane.toFront();
         checkdate.setConverter(Student_Database.date_converter);
 
-
-        //side_menu.setMinWidth(45);
-        //side_menu.setPrefWidth(45);
-        //side_menu.setMaxWidth(45);
-
-        Add.setPrefWidth(45);
-        Search.setPrefWidth(45);
-        Exit.setPrefWidth(45);
-        Settings.setPrefWidth(45);
-        Home.setPrefWidth(45);
+        side_menu_exited();
 
     }
 
@@ -243,6 +237,7 @@ public class MainWindowController implements Initializable {
         Search.setPrefWidth(200);
         Exit.setPrefWidth(200);
         Settings.setPrefWidth(200);
+        Save_btn.setPrefWidth(200);
         Home.setPrefWidth(200);
     }
 
@@ -255,8 +250,13 @@ public class MainWindowController implements Initializable {
         Search.setPrefWidth(45);
         Exit.setPrefWidth(45);
         Settings.setPrefWidth(45);
+        Save_btn.setPrefWidth(45);
         Home.setPrefWidth(45);
     }
 
+    public void save_to_database(){
+        student_database.resetStudent_namelist();
+        loginWindowControl.reader.SaveToFile(student_database);
+    }
 
 }

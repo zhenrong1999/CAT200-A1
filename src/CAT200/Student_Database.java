@@ -10,7 +10,6 @@ import java.util.LinkedList;
 
 //This is a class that acts like a database to store all booking information
 public class Student_Database extends LinkedList<Student> {
-
     public static String pattern = "dd-MM-yyyy";
     public static StringConverter<LocalDate> date_converter = new StringConverter<LocalDate>() {
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern(pattern);
@@ -33,6 +32,7 @@ public class Student_Database extends LinkedList<Student> {
             }
         }
     };
+    private LinkedList<Student> student_namelist = new LinkedList<Student>();
 
     //sort the database based on the type of information(i.e. student name)
     public void sort(String type) {
@@ -215,24 +215,103 @@ public class Student_Database extends LinkedList<Student> {
         String[] data_extracted;
         String valid;
         int error = 0;
-        int x=0;
+        int x = 0;
         for (int i = 0; i < raw_data.size(); i++) {
             data_extracted = raw_data.get(i).split(" ");
             try {
                 Student newStud = new Student(data_extracted[0], data_extracted[1], data_extracted[2], data_extracted[3], data_extracted[4]);
                 valid = newStud.validation();
-                System.out.println(valid);
+                valid += validation_matric_no_match_name(newStud);
+                valid += validation_check_date_with_cubical(newStud);
                 if (valid.equals("")) {
                     super.add(x, newStud);
                     x++;
-                }
-                else
+                } else {
+                    System.out.println("There are error in line " + i);
+                    System.out.println(valid);
                     error++;
+                }
             } catch (Exception e) {
                 throw new IllegalStateException("There are error in line " + i);
             }
         }
         System.out.println("No. of errors : " + error);
+    }
+
+    public String validation_matric_no_match_name(Student student) {
+        if (!isEmpty()) {
+            for (Student record_stu : student_namelist) {
+                if (record_stu.getMatric_no().equals(student.getMatric_no())) {
+                    if (record_stu.getName().equals(student.getName())) {
+                        return "";
+                    } else {
+                        return "Same Matric Number has found with different name.\n";
+                    }
+                }
+            }
+        }
+        student_namelist.add(new Student(student.getMatric_no(), student.getName()));
+        return "";
+    }
+
+    public String validation_check_date_with_cubical(Student student) {
+        sort("Check in date");
+        if (!isEmpty()) {
+            for (Student record_stu : this) {
+                if (record_stu.getCheckdate().equals(student.getCheckdate())) {
+                    if (record_stu.getCubic_id().equals(student.getCubic_id())) {
+                        if (record_stu.getMatric_no().equals(student.getMatric_no())) {
+                            if (record_stu.getName().equals(student.getName())) {
+                                return "Repeated record with same student, place and date.\n";
+                            }
+                        } else
+                            return "The cubical has been used by other student.\n";
+                    }
+                }
+            }
+        }
+        return "";
+    }
+
+
+    public void edit_all(String mode, Student student) {
+        sort("Matric number ");
+
+        for (Student namelist_stu : student_namelist) {
+            if (namelist_stu.getMatric_no().equals(student.getMatric_no())) {
+                namelist_stu.setName(student.getName());
+                break;
+            }
+        }
+
+        for (int i = 0; i < size(); i++) {
+            if (get(i).getMatric_no().equals(student.getMatric_no())) {
+                while (get(i).getMatric_no().equals(student.getMatric_no())) {
+                    {
+                        get(i).setName(student.getName());
+                        i++;
+                    }
+                }
+                return;
+            }
+        }
+    }
+
+    public void resetStudent_namelist() {
+        student_namelist = new LinkedList<>();
+        sort("Matric number");
+        student_namelist.add(new Student(getFirst().getMatric_no(), getFirst().getName()));
+        for (Student student : this) {
+                if (!student.getMatric_no().equals(student_namelist.getLast().getMatric_no()))
+                    student_namelist.add(new Student(student.getMatric_no(), student.getName()));
+        }
+    }
+
+
+    public void setStudent_namelist(LinkedList<Student> student_namelist) {
+        for (Student student : student_namelist) {
+            this.student_namelist.add(student.clone());
+        }
     }
 
     //clone the whole student database
@@ -241,7 +320,7 @@ public class Student_Database extends LinkedList<Student> {
         for (Student student : this) {
             clone.add(student.clone());
         }
-
+        clone.setStudent_namelist(student_namelist);
         return clone;
     }
 

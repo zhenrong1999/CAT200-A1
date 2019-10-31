@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -65,6 +66,7 @@ public class DisplayTableControl implements Initializable {
         //clone the original database for data comparison purposes
         student_database_clone = MainWindowController.student_database.deep_clone();
     }
+
 
     //Handles modification on student data in student database
     //Admin is able to directly edit the contents of the table
@@ -146,5 +148,6 @@ public class DisplayTableControl implements Initializable {
         }
         table_of_students.setItems(studentObservableList);
     }
+
 
 }

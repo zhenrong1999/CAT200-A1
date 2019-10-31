@@ -12,11 +12,12 @@
         <AnchorPane fx:id="side_menu" onMouseExited="#side_menu_exited" prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #c299fc;" styleClass="side_menu">
             <children>
                 <AnchorPane fx:id="small_side_menu" onMouseEntered="#side_menu_entered" prefHeight="430.0" prefWidth="45.0" />
-                <Button fx:id="Add" layoutY="165.0" mnemonicParsing="false" onAction="#handlebuttonaction" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" prefHeight="50.0" prefWidth="200.0" text="Add Student" textAlignment="RIGHT" />
-                <Button fx:id="Search" layoutY="215.0" mnemonicParsing="false" onAction="#handlebuttonaction" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" prefHeight="50.0" prefWidth="200.0" text="Search" textAlignment="RIGHT" />
+                <Button fx:id="Add" layoutY="115.0" mnemonicParsing="false" onAction="#handlebuttonaction" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" prefHeight="50.0" prefWidth="200.0" text="Add Student" textAlignment="RIGHT" />
+                <Button fx:id="Search" layoutY="165.0" mnemonicParsing="false" onAction="#handlebuttonaction" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" prefHeight="50.0" prefWidth="200.0" text="Search" textAlignment="RIGHT" />
                 <Button fx:id="Exit" layoutY="315.0" mnemonicParsing="false" onAction="#handlebuttonaction" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" prefHeight="50.0" prefWidth="200.0" text="Exit" textAlignment="RIGHT" />
-                <Button fx:id="Settings" layoutY="265.0" mnemonicParsing="false" onAction="#handlebuttonaction" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" prefHeight="50.0" prefWidth="200.0" text="Settings" textAlignment="RIGHT" />
-                <Button fx:id="Home" layoutY="115.0" mnemonicParsing="false" onAction="#handlebuttonaction" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" text="Home" />
+                <Button fx:id="Settings" layoutY="215.0" mnemonicParsing="false" onAction="#handlebuttonaction" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" prefHeight="50.0" prefWidth="200.0" text="Settings" textAlignment="RIGHT" />
+            <Button id="Save_btn" fx:id="Save_btn" layoutY="265.0" mnemonicParsing="false" onAction="#save_to_database" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" prefWidth="200.0" text="Save To Database" />
+                <Button fx:id="Home" layoutY="65.0" mnemonicParsing="false" onAction="#handlebuttonaction" onMouseEntered="#side_menu_entered" onMouseExited="#side_menu_exited" prefWidth="200.0" text="Home" />
             </children>
         </AnchorPane>
         <AnchorPane fx:id="content" layoutX="199.0" prefHeight="430.0" prefWidth="501.0" style="-fx-background-color: #6807f9;" styleClass="content">
@@ -42,7 +43,7 @@
                         <PasswordField fx:id="changePwd" layoutX="31.0" layoutY="158.0" prefHeight="25.0" prefWidth="356.0" />
                     </children>
                 </Pane>
-                <Pane styleClass="add_pane" fx:id="add_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #c400c6;">
+                <Pane fx:id="add_pane" layoutX="12.0" layoutY="75.0" prefHeight="341.0" prefWidth="475.0" style="-fx-background-color: #c400c6;" styleClass="add_pane">
                     <children>
                         <TextField fx:id="matricNum" layoutX="178.0" layoutY="26.0" />
                         <Label layoutX="33.0" layoutY="30.0" prefHeight="17.0" prefWidth="142.0" text="Matric Number         :" />

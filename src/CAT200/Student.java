@@ -20,6 +20,11 @@ public class Student {
         this.name.set(name);
     }
 
+    public Student(String matric_no,String name)  {
+        setMatric_no(matric_no);
+        setName(name);
+    }
+
     public Student(String matric_no, String name, String cubic_id, String checkdate, String supervisor) {
         setData(matric_no, name, cubic_id, checkdate, supervisor);
     }
@@ -73,11 +78,11 @@ public class Student {
     }
 
     public void setData(String matric_no, String name, String cubic_id, String checkdate, String supervisor) {
-        this.matric_no.set(matric_no);
-        this.name.set(name);
-        this.cubic_id.set(cubic_id);
-        this.checkdate.set(checkdate);
-        this.supervisor.set(supervisor);
+        setMatric_no(matric_no);
+        setName(name);
+        setCubic_id(cubic_id);
+        setCheckdate(checkdate);
+        setSupervisor(supervisor);
     }
 
     public void print() {
