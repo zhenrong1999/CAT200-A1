@@ -313,8 +313,8 @@ public class Student_Database extends LinkedList<Student> {
 
     public String reValidation(){
         Student_Database temp=new Student_Database();
-        temp.add(getFirst());
-        int i=1;
+
+        int i=0;
         String Error_message="";
         String error="";
         while(i<size()){
@@ -325,6 +325,10 @@ public class Student_Database extends LinkedList<Student> {
                 Error_message+="Error in"+get(i).print();
                 Error_message+=error;
             }
+            else{
+                temp.add(get(i));
+            }
+            i++;
         }
         return Error_message;
     }
